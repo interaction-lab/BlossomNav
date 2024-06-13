@@ -3,6 +3,19 @@ import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
 
+fx = 0
+fy = 0
+cx = 0
+cy = 0
+
+
+
+# Camera Intrinsics
+K = np.array([[fx, 0, cx],
+              [0, fy, cy],
+              [0, 0, 1]])
+
+
 # Read the two images
 img1 = cv.imread('./data/kinect_frame-000000.rgb.jpg')
 img2 = cv.imread('./data/kinect_frame-000060.rgb.jpg')
@@ -39,16 +52,17 @@ confidence_level = 0.45
 good_matches = [match for match in matches if match.distance < confidence_level * max(match.distance for match in matches)]
 
 # Calculate the essential matrix
-E, mask = cv.findEssentialMat(np.array([kp1[m.queryIdx].pt for m in good_matches]),
+E, Essential_Mask = cv.findEssentialMat(np.array([kp1[m.queryIdx].pt for m in good_matches]),
                                np.array([kp2[m.trainIdx].pt for m in good_matches]),
                                method=cv.RANSAC, prob=0.90, threshold=3)
 
-retval, R, t, mask = cv.recoverPose(E,
-                                      np.array([kp1[m.queryIdx].pt for m in good_matches]),
-                                      np.array([kp2[m.trainIdx].pt for m in good_matches]))
+H, Homography_Mask = cv.findHomography(np.array([kp1[m.queryIdx].pt for m in good_matches]), np.array([kp2[m.trainIdx].pt for m in good_matches]), cv.RANSAC,5.0)
 
-print(R)
-print(t)
+# computing Rotational (R) matrix and Translational (t) matrix from Essential Matrix (E)
+_, R_E, t_E, _ = cv.recoverPose(E, np.array([kp1[m.queryIdx].pt for m in good_matches]), np.array([kp2[m.trainIdx].pt for m in good_matches]))
+
+_, R_H, t_H, N_H = cv.decomposeHomographyMat(H, K)
+
 
 # Draw the good matches on the images
 image_with_good_matches = cv.drawMatches(img1, kp1, img2, kp2, good_matches, None, flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
