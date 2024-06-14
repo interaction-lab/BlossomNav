@@ -16,7 +16,7 @@ K = np.array([[fx, 0, cx],
 
 # Read the two images
 img1 = cv.imread('./data/pixel_frame-000000.rgb.jpg')
-img2 = cv.imread('./data/pixel_frame-000060.rgb.jpg')
+img2 = cv.imread('./data/pixel_frame-000002.rgb.jpg')
 
 # Convert the images to grayscale
 gray1 = cv.cvtColor(img1, cv.COLOR_BGR2GRAY)
@@ -106,11 +106,14 @@ print("---------------------------------------------------")
 print(H)
 print(R_H)
 print(t_H)
-print(N_H)
 
 print("---------------------------------------------------")
 
-print(filtered)
+if filtered is not None:
+    print(R_H(filtered[0][0]))
+    print(R_H(filtered[1][0]))
+    print(t_H(filtered[0][0]))
+    print(t_H(filtered[1][0]))
 
 print("---------------------------------------------------")
 
