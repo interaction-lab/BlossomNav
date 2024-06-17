@@ -47,13 +47,9 @@ def homography_error(H, points1, points2):
     transformed_points1 = np.dot(H, points1_h.T).T
     transformed_points2 = np.dot(np.linalg.inv(H), points2_h.T).T
 
-    # Change the data to be a form that can be used to calculate error
-    transformed_points1 = transformed_points1[:, :2]
-    transformed_points2 = transformed_points2[:, :2]
-
     # Calculate the distances between original and transformed points
-    errors1 = np.linalg.norm(points2 - transformed_points1, axis=1)
-    errors2 = np.linalg.norm(points1 - transformed_points2, axis=1)
+    errors1 = np.linalg.norm(points2_h - transformed_points1)
+    errors2 = np.linalg.norm(points1_h - transformed_points2)
 
     # Compute the symmetric transfer error as the average of errors1 and errors2
     symmetric_error = np.mean(errors1 + errors2)
@@ -84,6 +80,8 @@ def essential_error(E, points1, points2):
     epipolarlines_1 = np.dot(F, points1_h.T).T
     epipolarlines_2 = np.dot(np.transpose(F), points2_h.T).T
 
+    print(epipolarlines_1[0], F @ points1_h[0])
+
     err_sums = []
     # Calculate the distances between original and transformed points
     for i in range(len(points1_h)):
@@ -100,7 +98,7 @@ K = camera_intrinsics()
 
 # Read the two images
 img1 = cv.imread('./data/pixel_frame-000000.rgb.jpg')
-img2 = cv.imread('./data/pixel_frame-000010.rgb.jpg')
+img2 = cv.imread('./data/pixel_frame-000060.rgb.jpg')
 
 # Convert the images to grayscale
 gray1 = cv.cvtColor(img1, cv.COLOR_BGR2GRAY)
@@ -173,56 +171,6 @@ elif essential_error(E, img1_pts, img2_pts) > homography_error(H, img1_pts, img2
 else:
     print("Error: Something went wrong")
 
-'''
-print("---------------------------------------------------")
-print("checking to make sure that E is a essential matrix")
-
-# Property 1: Rank of the matrix is 2
-rank_E = np.linalg.matrix_rank(E)
-print("\nRank of the matrix:", rank_E)
-
-# Property 2: det(E) = 0
-det_E = np.linalg.det(E)
-print("\nDeterminant of the matrix:", det_E)
-
-# Property 3: E^T * E should be a scalar multiple of the identity matrix
-ETE = np.dot(E.T, E)
-identity = np.eye(3)
-scalar_multiple = ETE / ETE[0, 0]  # Normalize to make the first element 1
-print("\nE^T * E:")
-print(ETE)
-print("\nScalar multiple of the identity matrix:")
-print(scalar_multiple)
-
-# Property 4: Singular value decomposition (SVD) of E should have two equal singular values and one zero singular value
-U, S, Vt = np.linalg.svd(E)
-print("\nSingular values of E:")
-print(S)
-
-print("-----------------------------------------------")
-
-print(E)
-print(R_E)
-print(t_E)
-
-print("---------------------------------------------------")
-
-print(H)
-print(R_H)
-print(t_H)
-
-print("---------------------------------------------------")
-
-if filtered is not None:
-    print(R_H[filtered[0][0]])
-    print(R_H[filtered[1][0]])
-    print(t_H[filtered[0][0]])
-    print(t_H[filtered[1][0]])
-else:
-    print(None)
-
-print("---------------------------------------------------")
-
 # Draw the good matches on the images
 image_with_good_matches = cv.drawMatches(img1, kp1, img2, kp2, good_matches, None, flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
 
@@ -237,5 +185,3 @@ while True:
 
 # Close all windows
 cv.destroyAllWindows()
-
-'''
