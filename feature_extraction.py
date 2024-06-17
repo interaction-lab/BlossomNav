@@ -153,8 +153,8 @@ kp2_pts_float32 = np.array([kp.pt for kp in kp2], dtype=np.float32)[:, np.newaxi
 
 # Find the two best Rotation and translation matrices from the four different solutions in the Homography Matrix
 filtered = cv.filterHomographyDecompByVisibleRefpoints(R_H, N_H, kp1_pts_float32, kp2_pts_float32)
-print(essential_error(E, img1_pts, img2_pts))
-print(homography_error(H, img1_pts, img2_pts))
+print("Symmetric Error for Essential Matrix", essential_error(E, img1_pts, img2_pts))
+print("Symmetric Error for Homography Matrix", homography_error(H, img1_pts, img2_pts))
 
 if essential_error(E, img1_pts, img2_pts) < homography_error(H, img1_pts, img2_pts):
     print("Essential Matrix was better")
