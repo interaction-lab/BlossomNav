@@ -13,9 +13,9 @@ Project Page: https://github.com/interaction-lab/BlossomNav.git
 
 This script contains functions for Visual Odometry techniques used in BlossomNav
 
-The following are saved to file:
-│   ├── <kinect_rgb_images> # images transformed to match kinect intrinsics
-│   ├── <kinect_depth_images> # estimated depth (.npy for fusion and .jpg for visualization)
+The following is saved to file ():
+│   ├── <[camera_source]-poses> # camera poses calculated from pictures in [camera_source]-images folder
+
 
 """
 
@@ -25,8 +25,8 @@ from utils.utils import read_yaml, calculate_E_or_H, convert_Rt_Open3D
 
 CONFIG_PATH = "config.yaml"
 config = read_yaml(CONFIG_PATH)
-data_dir = config["paths"]["data_dir"]
-camera_source = config["camera"]["name"]
+data_dir = config["data_dir"]
+camera_source = config["camera_source"]
 
 images_dir = os.path.join(data_dir, camera_source + "-images")
 poses_dir = os.path.join(data_dir, camera_source + "-poses")
