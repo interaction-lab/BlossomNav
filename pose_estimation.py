@@ -21,7 +21,7 @@ The following are saved to file:
 
 import os
 import numpy as np
-from utils.utils import read_yaml, calculate_E_or_H, rotation_matrix_to_euler_angles
+from utils.utils import read_yaml, calculate_E_or_H, convert_Rt_Open3D
 
 CONFIG_PATH = "config.yaml"
 config = read_yaml(CONFIG_PATH)
@@ -39,9 +39,7 @@ for frame in range(1, end_frame): # first image has been set as ground truth, ca
     ground_truth = images_dir + "/" + camera_source + "_frame-%06d.rgb.jpg"%(frame - 1)
     new_image = images_dir + "/" + camera_source + "_frame-%06d.rgb.jpg"%(frame)
     R, t = calculate_E_or_H(ground_truth, new_image)
-    pitch, yaw, roll = rotation_matrix_to_euler_angles(R)
-    pitch_deg, yaw_deg, roll_deg = np.degrees(pitch), np.degrees(yaw), np.degrees(roll)
-    print(pitch_deg)
-    print(yaw)
-    print(roll)
-    print("----------------------")
+    Open3D_matrix = convert_Rt_Open3D(R, t)
+    file_name = camera_source + "_frame-%06d.pose.txt"%(frame)
+    path = os.path.join(poses_dir, file_name)
+    np.savetxt(path, Open3D_matrix)

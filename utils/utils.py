@@ -236,3 +236,10 @@ def rotation_matrix_to_euler_angles(R):
         roll = 0
 
     return pitch, yaw, roll
+
+def convert_Rt_Open3D(R, t):
+    # Constructing the 4x4 transformation matrix
+    T = np.eye(4)
+    T[:3, :3] = R
+    T[:3, 3] = t.reshape(3)
+    return T
