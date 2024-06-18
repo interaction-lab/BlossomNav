@@ -11,7 +11,7 @@ License: MIT
 Authors: Anthony Song and Nathan Dennler, University of Southern California
 Project Page: https://github.com/interaction-lab/BlossomNav.git
 
-This script contains functions for Visual Odometry techniques used in BlossomNav
+This script allows users to merge multiple .jpeg images into a videos
 
 """
 import cv2
