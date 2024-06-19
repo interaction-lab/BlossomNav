@@ -12,9 +12,10 @@ Authors: Anthony Song and Nathan Dennler, University of Southern California
 Project Page: https://github.com/interaction-lab/BlossomNav.git
 
 This script contains functions for Visual Odometry techniques used in BlossomNav
+as well as functions for MonoNav that were reproduced with permission.
 
 """
-
+ 
 import cv2 as cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -243,3 +244,69 @@ def convert_Rt_Open3D(R, t):
     T[:3, :3] = R
     T[:3, 3] = t.reshape(3)
     return T
+
+# MIT License
+
+# Copyright (c) 2023 Nate Simon
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+# File author: Nate Simon
+
+"""
+Compute depth from an RGB image using ZoeDepth
+Returns depth_numpy (uint16 in mm), depth_colormap (for visualization)
+"""
+def compute_depth(color, zoe):
+    # Compute depth
+    depth = zoe.infer_pil(color, output_type="tensor")  # as torch tensor
+    depth_numpy = np.asarray(depth) # Convert to numpy array
+    depth_numpy = 1000*depth_numpy # Convert to mm
+    depth_numpy = depth_numpy.astype(np.uint16) # Convert to uint16
+
+    # Save images and depth array
+    depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_numpy, alpha=0.03), cv2.COLORMAP_JET)
+
+    return depth_numpy, depth_colormap
+
+"""
+Read in the intrinsics.json file and return the camera matrix and distortion coefficients
+"""
+def get_calibration_values(camera_calibration_path):
+    # Load the camera calibration file
+    with open(camera_calibration_path, "r") as json_file:
+        data = json.load(json_file)
+    mtx = np.array(data['CameraMatrix'])
+    dist = np.array(data['DistortionCoefficients'])
+    return mtx, dist
+
+"""
+Transform the raw image to match the kinect image: dimensions and intrinsics.
+This involves resizing the image, scaling the camera matrix, and undistorting the image.
+"""
+def transform_image(image, mtx, dist, kinect):
+    if image.shape[0] != kinect.height or image.shape[1] != kinect.width:
+        # Resize the camera matrix to match new dimensions
+        scale_vec = np.array([kinect.width / image.shape[1], kinect.height / image.shape[0], 1]).reshape((3,1))
+        mtx = mtx * scale_vec
+        # Resize image to match the kinect dimensions & new intrinsics
+        image = cv2.resize(image, (kinect.width, kinect.height))
+    # Transform to the kinect camera matrix
+    transformed_image = cv2.undistort(np.asarray(image), mtx, dist, None, kinect.intrinsic_matrix)
+    return transformed_image

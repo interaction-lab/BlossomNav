@@ -4,7 +4,9 @@ save_dir_prefix: './data/mononav-'
 # Camera Settings
 camera_num: 0 # camera number index (test with utils/test_camera.py), try (-1, 0, 1, 2, ...)
 camera_source: 'pixel' # used for naming files
-camera_calibration_path: 'utils/calibration/intrinsics.json' # camera calibration file (for undistortion)
+camera_calibration_path: 'utils/calibration/demo_intrinsics.json' # camera calibration file (for undistortion)
+
+# Can be obtained from the intrinsics.json
 fx: 953.3723444283503
 fy: 957.9130487518722
 cx: 783.8421764606697
