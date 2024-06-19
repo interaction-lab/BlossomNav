@@ -22,6 +22,17 @@
 
 # File author: Nate Simon
 
+"""
+
+This script reads in a stream of RGB images, transforms them to the Kinect intrinsics,
+and estimates metric depth using ZoeDepth.
+
+The following are saved to file:
+│   ├── <[camera_source]-rgb-images> # images transformed to match kinect intrinsics
+│   ├── <[camera_source]-depth-images> # estimated depth (.npy for fusion and .jpg for visualization)
+
+"""
+
 import time
 import os
 import sys
@@ -37,7 +48,7 @@ import open3d as o3d
 from PIL import Image
 import numpy as np
 
-from utils.utils import compute_depth, read_yaml, get_calibration_values, transform_image
+from utils.utils import read_yaml, compute_depth, get_calibration_values, transform_image
 
 """"
 This script runs a depth estimation model on a directory of RGB images and saves the depth images.
@@ -52,11 +63,11 @@ print("Loading" + camera_source + "images from: ", data_dir, ".")
 
 # Set & create directories for images
 rgb_dir = os.path.join(data_dir, camera_source + "-images")
-kinect_img_dir = os.path.join(data_dir, "kinect-rgb-images")
-os.mkdir(kinect_img_dir) if not os.path.exists(kinect_img_dir) else None
-kinect_depth_dir = os.path.join(data_dir, "kinect-depth-images")
-os.mkdir(kinect_depth_dir) if not os.path.exists(kinect_depth_dir) else None
-print("Saving Depth images to: ", kinect_depth_dir)
+img_dir = os.path.join(data_dir, camera_source + "-rgb-images")
+os.mkdir(img_dir) if not os.path.exists(img_dir) else None
+depth_dir = os.path.join(data_dir, camera_source + "-depth-images")
+os.mkdir(depth_dir) if not os.path.exists(depth_dir) else None
+print("Saving Depth images to: ", depth_dir)
 
 # Load the calibration values
 camera_calibration_path = config["camera_calibration_path"]
@@ -88,9 +99,9 @@ for frame_number in range(0, end_frame): # ignore first frame as that has been s
     # Compute depth
     depth_numpy, depth_colormap = compute_depth(kinect_rgb, zoe)
     # Save images
-    cv2.imwrite(kinect_img_dir + "/kinect_frame-%06d.rgb.jpg"%(frame_number), kinect_rgb)
-    cv2.imwrite(kinect_depth_dir + "/" + "kinect_frame-%06d.depth.jpg"%(frame_number), depth_colormap)
-    np.save(kinect_depth_dir + "/" + "kinect_frame-%06d.depth.npy"%(frame_number), depth_numpy) # saved in meters
+    cv2.imwrite(img_dir + "/kinect_frame-%06d.rgb.jpg"%(frame_number), kinect_rgb)
+    cv2.imwrite(depth_dir + "/" + "kinect_frame-%06d.depth.jpg"%(frame_number), depth_colormap)
+    np.save(depth_dir + "/" + "kinect_frame-%06d.depth.npy"%(frame_number), depth_numpy) # saved in meters
 
 print("Time to compute depth for %d images: %f"%(end_frame, time.time()-start_time))
 # On Nvidia GeForce RTX 4090: 13.6 s for 80 images
