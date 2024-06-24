@@ -41,15 +41,16 @@ curr_state = convert_Rt_Open3D(np.eye(3), np.zeros(3)) # 1, 3 if no work
 for frame in range(1, end_frame - 2): # first image has been set as ground truth, can't obtain pose data for it
     ground_truth = images_dir + "/" + camera_source + "_frame-%06d.rgb.jpg"%(frame - 1)
     new_image = images_dir + "/" + camera_source + "_frame-%06d.rgb.jpg"%(frame)
-    ground_truth_d = depth_dir + "/" + camera_source + "_frame-%06d.depth.npy"%(frame - 1)
-    new_image_d = depth_dir + "/" + camera_source + "_frame-%06d.depth.npy"%(frame)
-    ground_truth_depth = np.load(ground_truth_d)
-    new_image_depth = np.load(new_image_d)
+    ground_truth_depth = np.load(depth_dir + "/" + camera_source + "_frame-%06d.depth.npy"%(frame - 1))
+    new_image_depth = np.load(depth_dir + "/" + camera_source + "_frame-%06d.depth.npy"%(frame))
     print(frame - 1, frame)
     R, t = calculate_E_or_H(ground_truth, new_image)
     print("--------------------------------------")
-    Open3D_matrix = convert_Rt_Open3D(R, t)
-    Open3D_matrix[1][3] = -Open3D_matrix[1][3] # Open3D is Right, Down, Front
+    distance_traveled = np.median(new_image_depth - ground_truth_depth)
+    scaled_t = distance_traveled * 0.00001 * t
+    Open3D_matrix = convert_Rt_Open3D(R, scaled_t)
+    Open3D_matrix[0][3], Open3D_matrix[1][3] = -Open3D_matrix[0][3],-Open3D_matrix[1][3] # Open3D is Right, Down, Front
+                                                                                            # OpenCV is Left, Up, Front
     if np.median(new_image_depth) < np.median(ground_truth_depth) and Open3D_matrix[2][3] < 0:
         Open3D_matrix[2][3] = -Open3D_matrix[2][3]
     curr_state = curr_state @ Open3D_matrix

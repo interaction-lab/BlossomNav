@@ -146,7 +146,7 @@ def match_images(file_path_1, file_path_2, draw=False):
 
     # Keep only the matches with confidence level above the chosen threshold
     good_matches = [match for match in matches if match.distance < confidence_level * max(match.distance for match in matches)]
-
+    
     img1_pts = np.array([kp1[m.queryIdx].pt for m in good_matches])
     img2_pts = np.array([kp2[m.trainIdx].pt for m in good_matches])
 

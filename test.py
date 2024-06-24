@@ -1,10 +1,12 @@
 import numpy as np
+from utils.utils import calculate_E_or_H
 
-data = np.load("./data/pixel-depth-images/pixel_frame-000012.depth.npy")
+'''
+data = np.load("./data/pixel-depth-images/pixel_frame-000035.depth.npy")
 
-data1 = np.load("./data/pixel-depth-images/pixel_frame-000013.depth.npy")
+data1 = np.load("./data/pixel-depth-images/pixel_frame-000036.depth.npy")
 
-data2 = np.load("./data/pixel-depth-images/pixel_frame-000014.depth.npy")
+data2 = np.load("./data/pixel-depth-images/pixel_frame-000037.depth.npy")
 
 print(data.shape)
 
@@ -42,3 +44,10 @@ print("Max Depth:\n", max1)
 print("Array data:\n", data1)
 print("Total Sum:\n", value1)
 print("Max Depth:\n", max1)
+'''
+
+file_path1 = "./data/pixel-images/pixel_frame-000001.rgb.jpg"
+file_path2 = "./data/pixel-images/pixel_frame-000009.rgb.jpg"
+file_path3 = "./data/pixel-images/down.jpg"
+file_path4 = "./data/pixel-images/up.jpg"
+print(calculate_E_or_H(file_path4, file_path3, draw=True))

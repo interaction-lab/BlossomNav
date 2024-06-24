@@ -80,6 +80,8 @@ end_frame = split_filename(depth_files[-1])
 for filename in depth_files:
     # Get the frame number from the depth filename
     frame_number = split_filename(filename)
+    if frame_number == len(depth_files) - 1:
+        continue
     print("Integrating frame %d/%d"%(frame_number,end_frame))
     # Get rbg_file
     rgb_file = rgb_dir + source + "_frame-%06d.rgb.jpg"%(frame_number)
