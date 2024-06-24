@@ -24,6 +24,7 @@ dependencies:
     - timm==0.6.12
     - tqdm==4.64.1
     - wandb==0.13.9
+    - mkl==2024.0 # to solve pytorch error
     - open3d==0.18.0 # mononav
     - Pillow==9.4.0 # mononav 
     - PyYAML==5.4.1 # mononav

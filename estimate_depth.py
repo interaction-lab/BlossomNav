@@ -84,24 +84,24 @@ zoe = model_zoe.to(DEVICE)
 
 # Figure out how many images are in folder by counting .jpg files
 end_frame = len([name for name in os.listdir(rgb_dir) if os.path.isfile(os.path.join(rgb_dir, name)) and name.endswith(".jpg")])
-end_frame = end_frame - 1 # Ignore last image since sometimes pose information is not saved for it
+end_frame = end_frame - 1
 
 start_time = time.time()
 
-for frame_number in range(0, end_frame): # ignore first frame as that has been set to ground truth
+for frame_number in range(1, end_frame): # ignore first frame as that has been set to ground truth
     print("Applying ZoeDepth to:  %d/%d"%(frame_number+1,end_frame))
     filename = rgb_dir + "/" + camera_source + "_frame-%06d.rgb.jpg"%(frame_number)
     # Read in image with Pillow and convert to RGB
-    crazyflie_rgb = Image.open(filename)#.convert("RGB")  # load
+    camera_source_rgb = Image.open(filename)#.convert("RGB")  # load
     # Resize, Undistort, and Warp image to kinect's dimensions and intrinsics
-    kinect_rgb = transform_image(np.asarray(crazyflie_rgb), mtx, dist, kinect)
+    kinect_rgb = transform_image(np.asarray(camera_source_rgb), mtx, dist, kinect)
     kinect_rgb = cv2.cvtColor(kinect_rgb, cv2.COLOR_BGR2RGB)
     # Compute depth
     depth_numpy, depth_colormap = compute_depth(kinect_rgb, zoe)
     # Save images
-    cv2.imwrite(img_dir + "/kinect_frame-%06d.rgb.jpg"%(frame_number), kinect_rgb)
-    cv2.imwrite(depth_dir + "/" + "kinect_frame-%06d.depth.jpg"%(frame_number), depth_colormap)
-    np.save(depth_dir + "/" + "kinect_frame-%06d.depth.npy"%(frame_number), depth_numpy) # saved in meters
+    cv2.imwrite(img_dir + "/" + camera_source +"_frame-%06d.rgb.jpg"%(frame_number-1), kinect_rgb)
+    cv2.imwrite(depth_dir + "/" + camera_source + "_frame-%06d.depth.jpg"%(frame_number-1), depth_colormap)
+    np.save(depth_dir +"/" + camera_source + "_frame-%06d.depth.npy"%(frame_number-1), depth_numpy) # saved in meters
 
 print("Time to compute depth for %d images: %f"%(end_frame, time.time()-start_time))
 # On Nvidia GeForce RTX 4090: 13.6 s for 80 images

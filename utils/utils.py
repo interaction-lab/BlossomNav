@@ -134,9 +134,6 @@ def match_images(file_path_1, file_path_2, draw=False):
     image_with_keypoints1 = cv2.drawKeypoints(img1, kp1, None, color=(0, 255, 0), flags=0)
     image_with_keypoints2 = cv2.drawKeypoints(img2, kp2, None, color=(0, 255, 0), flags=0)
 
-    cv2.imshow("img1", image_with_keypoints1)
-    cv2.imshow("img2", image_with_keypoints2)
-
     # Match the descriptors
     bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
     matches = bf.match(des1, des2)
@@ -155,10 +152,23 @@ def match_images(file_path_1, file_path_2, draw=False):
 
     # Draws the good matches on the images if draw is true
     if draw:
+        # Define the desired frame size
+        size1 = (640, 480)
+        size2 = (1280, 480)
+
+        # Resize the frames
+        resized_img1 = cv2.resize(image_with_keypoints1, size1, interpolation=cv2.INTER_LINEAR)
+        resized_img2 = cv2.resize(image_with_keypoints2, size1, interpolation=cv2.INTER_LINEAR)
+
+        cv2.imshow("img1", resized_img1)
+        cv2.imshow("img2", resized_img2)
+
         image_with_good_matches = cv2.drawMatches(img1, kp1, img2, kp2, good_matches, None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
 
+        resized_matches = cv2.resize(image_with_good_matches, size2, interpolation=cv2.INTER_LINEAR)
+
         # Display the image with good matches
-        cv2.imshow("matching", image_with_good_matches)
+        cv2.imshow("matching", resized_matches)
 
         # Wait for a key press, but allow Ctrl+C to terminate the program
         while True:
@@ -171,7 +181,7 @@ def match_images(file_path_1, file_path_2, draw=False):
 
     return img1_pts, img2_pts
 
-def calculate_E_or_H(file_path_1, file_path_2):
+def calculate_E_or_H(file_path_1, file_path_2, draw=False, preference=None):
     """
     Calculates, chooses, and decomposes the Essential Matrix or the Homography based on symmetric transfer error.
 
@@ -185,18 +195,22 @@ def calculate_E_or_H(file_path_1, file_path_2):
     K = camera_intrinsics()
 
     # obtain matched points from match_images function
-    img1_pts, img2_pts = match_images(file_path_1, file_path_2, draw=False)
+    img1_pts, img2_pts = match_images(file_path_1, file_path_2, draw)
 
     # Calculate the essential matrix
     E, Essential_Mask = cv2.findEssentialMat(img1_pts,
                                 img2_pts, K,
-                                method=cv2.RANSAC, prob=0.999, threshold=3)
+                                method=cv2.RANSAC, prob=0.999, threshold=1)
 
     H, Homography_Mask = cv2.findHomography(img1_pts, img2_pts, cv2.RANSAC,5.0)
 
     # computing Rotational (R) matrix and Translational (t) matrix from Essential Matrix (E)
     _, R_E, t_E, _ = cv2.recoverPose(E, img1_pts, img2_pts)
 
+    if R_E is None or t_E is None:
+        raise ValueError("Pose recovery failed")
+    
+    # decompose the homography matrix
     _, R_H, t_H, N_H = cv2.decomposeHomographyMat(H, K)
 
     # Convert keypoint coordinates to an input filterHomographyDecompByVisibleRefPoints likes
@@ -208,10 +222,11 @@ def calculate_E_or_H(file_path_1, file_path_2):
     print("Symmetric Error for Essential Matrix", essential_error(E, img1_pts, img2_pts))
     print("Symmetric Error for Homography Matrix", homography_error(H, img1_pts, img2_pts))
 
-    if essential_error(E, img1_pts, img2_pts) < homography_error(H, img1_pts, img2_pts):
+
+    if preference == "E" or (preference == None and essential_error(E, img1_pts, img2_pts) < homography_error(H, img1_pts, img2_pts)):
         return R_E, t_E
-    elif essential_error(E, img1_pts, img2_pts) > homography_error(H, img1_pts, img2_pts):
-        return R_H, t_H
+    elif preference == "H" or (preference == None and essential_error(E, img1_pts, img2_pts) > homography_error(H, img1_pts, img2_pts)):
+        return filtered
     else:
         print("Error. Moving To Next Frame!")
 
@@ -279,10 +294,6 @@ import open3d as o3d
 import open3d.core as o3c
 import copy
 import yaml, json
-
-# For Craziflie logging
-from cflib.crazyflie.log import LogConfig
-from cflib.crazyflie.syncLogger import SyncLogger
 
 # For bufferless video capture
 import queue, threading
@@ -353,34 +364,6 @@ class VideoCapture:
 
   def read(self):
     return self.q.get()
-
-"""
-Get the global Crazyflie (camera) pose from the logger, convert to the Open3D frame
-Crazyflie frame: (X, Y, Z) is FRONT LEFT UP (FLU)
-Open3D frame: (X, Y, Z) is RIGHT DOWN FRONT (RDF)
-"""
-def get_crazyflie_pose(scf, logstate):
-    with SyncLogger(scf, logstate) as logger:
-        for log_entry in logger:
-            data = log_entry[1]
-            _x = data['stateEstimate.x']
-            _y = data['stateEstimate.y']
-            _z = data['stateEstimate.z']
-            _roll = data['stateEstimate.roll']
-            _pitch = data['stateEstimate.pitch']
-            _yaw = data['stateEstimate.yaw']
-            # Convert position from CF to TSDF frame
-            xyz = np.array([-_y, -_z, _x]) # Convert to TSDF frame
-            # Convert rotation from CF to TSDF frame
-            r = Rotation.from_euler('xyz', [_roll, -_pitch, _yaw], degrees=True)
-            R = r.as_matrix()
-            M_change = np.array([[0,-1,0],[0,0,-1],[1,0,0]])
-            R = M_change @ R @ M_change.T
-
-            # Create a homogeneous matrix
-            Hmtrx = np.hstack((R, xyz.reshape(3,1)))
-            # return camera position
-            return np.vstack((Hmtrx, np.array([0, 0, 0, 1])))
 
 """
 Compute depth from an RGB image using ZoeDepth
@@ -563,56 +546,10 @@ def choose_primitive(vbg, camera_position, traj_linesets, goal_position, dist_th
                     max_traj_score = nearest_voxel_dist
 
     if max_traj_idx is None:
-        # No trajectory meets the dist_threshold criterion, crazyflie should stop.
+        # No trajectory meets the dist_threshold criterion, robot should stop.
         shouldStop = True
     return shouldStop, max_traj_idx
 
-
-"""
-Upon Crazyflie startup, these helper functions ensure the EKF is properly initialized before takeoff.
-#  Copyright (C) 2018 Bitcraze AB
-Taken from several Crazyflie examples, e.g., https://github.com/bitcraze/crazyflie-lib-python/blob/master/examples/autonomy/autonomous_sequence_high_level.py
-"""
-def reset_estimator(scf):
-    scf.param.set_value('kalman.resetEstimation', '1')
-    time.sleep(0.1)
-    scf.param.set_value('kalman.resetEstimation', '0')
-    
-    print('Waiting for estimator to find position...')
-
-    log_config = LogConfig(name='Kalman Variance', period_in_ms=500)
-    log_config.add_variable('kalman.varPX', 'float')
-    log_config.add_variable('kalman.varPY', 'float')
-    log_config.add_variable('kalman.varPZ', 'float')
-
-    var_y_history = [1000] * 10
-    var_x_history = [1000] * 10
-    var_z_history = [1000] * 10
-
-    threshold = 0.001
-
-    with SyncLogger(scf, log_config) as logger:
-        for log_entry in logger:
-            data = log_entry[1]
-
-            var_x_history.append(data['kalman.varPX'])
-            var_x_history.pop(0)
-            var_y_history.append(data['kalman.varPY'])
-            var_y_history.pop(0)
-            var_z_history.append(data['kalman.varPZ'])
-            var_z_history.pop(0)
-
-            min_x = min(var_x_history)
-            max_x = max(var_x_history)
-            min_y = min(var_y_history)
-            max_y = max(var_y_history)
-            min_z = min(var_z_history)
-            max_z = max(var_z_history)
-
-            if (max_x - min_x) < threshold and (
-                    max_y - min_y) < threshold and (
-                    max_z - min_z) < threshold:
-                break
 """
 Read in the intrinsics.json file and return the camera matrix and distortion coefficients
 """

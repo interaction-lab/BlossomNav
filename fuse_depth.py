@@ -85,7 +85,7 @@ for filename in depth_files:
     rgb_file = rgb_dir + source + "_frame-%06d.rgb.jpg"%(frame_number)
 
     # Read in camera pose
-    pose_file = data_dir + "/crazyflie-poses/crazyflie_frame-%06d.pose.txt"%(frame_number)
+    pose_file = data_dir + "/" + source + "-poses/" + source + "_frame-%06d.pose.txt"%(frame_number)
     cam_pose = np.loadtxt(pose_file)
     poses.append(cam_pose)
 
