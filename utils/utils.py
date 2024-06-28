@@ -259,6 +259,38 @@ def convert_Rt_Open3D(R, t):
     T[:3, :3] = R
     T[:3, 3] = t.reshape(3)
     return T
+
+def calculate_3d_coordinates(depth_matrix, focal_length, principal_point):
+    """
+    Calculate the 3D coordinates for each pixel in the image using the depth matrix.
+    """
+    h, w = depth_matrix.shape
+    fx, fy = focal_length
+    cx, cy = principal_point
+    X = np.zeros((h, w))
+    Y = np.zeros((h, w))
+    Z = depth_matrix
+
+    for v in range(h):
+        for u in range(w):
+            Z_val = Z[v, u]
+            X[v, u] = (u - cx) * Z_val / fx
+            Y[v, u] = (v - cy) * Z_val / fy
+
+    return X, Y, Z
+
+def calculate_distance_between_images(depth_matrix1, depth_matrix2, focal_length, principal_point):
+    """
+    Calculate the average distance between corresponding points in two images using their depth matrices.
+    """
+    X1, Y1, Z1 = calculate_3d_coordinates(depth_matrix1, focal_length, principal_point)
+    X2, Y2, Z2 = calculate_3d_coordinates(depth_matrix2, focal_length, principal_point)
+    
+    distances = np.sqrt((X2 - X1)**2 + (Y2 - Y1)**2 + (Z2 - Z1)**2)
+    average_distance = np.mean(distances)
+    
+    return average_distance
+
 # MIT License
 
 # Copyright (c) 2023 Nate Simon

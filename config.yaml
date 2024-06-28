@@ -25,7 +25,7 @@ VoxelBlockGrid:
   depth_scale: 1000.0 # 1000.0 is default (mm to m), scale factor for depth values during integration
   depth_max: 7.0 # max depth to include in the reconstruction
   trunc_voxel_multiplier: 8.0
-  device: "CPU:0" # "CUDA:0" (faster) or "CPU:0" (if no GPU is available)
+  device: "CUDA:0" # "CUDA:0" (faster) or "CPU:0" (if no GPU is available)
 
 # Planning Settings
 trajlib_dir: 'utils/trajlib/' # where to save & retrieve the trajectory library (motion primitives)

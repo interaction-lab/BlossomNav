@@ -21,12 +21,14 @@ The following is saved to file ():
 
 import os
 import numpy as np
-from utils.utils import read_yaml, calculate_E_or_H, convert_Rt_Open3D
+import time
+from utils.utils import read_yaml, calculate_E_or_H, convert_Rt_Open3D, calculate_distance_between_images
 
 CONFIG_PATH = "config.yaml"
 config = read_yaml(CONFIG_PATH)
 data_dir = config["data_dir"]
 camera_source = config["camera_source"]
+camera_info = config["camera_calibration_path"]
 
 images_dir = os.path.join(data_dir, camera_source + "-images")
 depth_dir = os.path.join(data_dir, camera_source + "-depth-images")
@@ -38,22 +40,33 @@ end_frame = len([name for name in os.listdir(images_dir) if os.path.isfile(os.pa
 
 curr_state = convert_Rt_Open3D(np.eye(3), np.zeros(3)) # 1, 3 if no work
 
+start_time = time.time()
+
 for frame in range(1, end_frame - 2): # first image has been set as ground truth, can't obtain pose data for it
     ground_truth = images_dir + "/" + camera_source + "_frame-%06d.rgb.jpg"%(frame - 1)
     new_image = images_dir + "/" + camera_source + "_frame-%06d.rgb.jpg"%(frame)
     ground_truth_depth = np.load(depth_dir + "/" + camera_source + "_frame-%06d.depth.npy"%(frame - 1))
     new_image_depth = np.load(depth_dir + "/" + camera_source + "_frame-%06d.depth.npy"%(frame))
-    print(frame - 1, frame)
+    ground_truth_d = ground_truth_depth.astype(np.int16)
+    new_image_d = new_image_depth.astype(np.int16)
     R, t = calculate_E_or_H(ground_truth, new_image)
     print("--------------------------------------")
-    distance_traveled = np.median(new_image_depth - ground_truth_depth)
-    scaled_t = distance_traveled * 0.00001 * t
+    print(frame - 1, frame)
+    distance_traveled = calculate_distance_between_images(ground_truth_depth, new_image_depth, (config["fx"], config["fy"]), (config["cx"], config["cy"]))
+    scaled_t = distance_traveled * 0.001 * t
     Open3D_matrix = convert_Rt_Open3D(R, scaled_t)
-    Open3D_matrix[0][3], Open3D_matrix[1][3] = -Open3D_matrix[0][3],-Open3D_matrix[1][3] # Open3D is Right, Down, Front
+    Open3D_matrix[0][3], Open3D_matrix[1][3] = -Open3D_matrix[0][3], -Open3D_matrix[1][3] # Open3D is Right, Down, Front
                                                                                             # OpenCV is Left, Up, Front
-    if np.median(new_image_depth) < np.median(ground_truth_depth) and Open3D_matrix[2][3] < 0:
+    # max_new = np.max(new_image_depth)
+    # max_ground = np.max(ground_truth_depth)
+    delta_D = new_image_d - ground_truth_d
+    if np.sum(delta_D < 0) / delta_D.size > 0.50 and Open3D_matrix[2][3] < 0:
+        print("Reversed Forward & Backward")
         Open3D_matrix[2][3] = -Open3D_matrix[2][3]
+    print(Open3D_matrix)
     curr_state = curr_state @ Open3D_matrix
     file_name = camera_source + "_frame-%06d.pose.txt"%(frame-1)
     path = os.path.join(poses_dir, file_name)
     np.savetxt(path, curr_state)
+
+print("Time to compute poses: %f"%(time.time()-start_time))
