@@ -15,7 +15,7 @@ conda env create -n blossomnav --file environment.yml
 conda activate mononav
 ```
 **Tested On:** (release / driver / GPU) \n
-Ubuntu 22.04 / NVIDIA 535 / RTX 3060
+<br />Ubuntu 22.04 / NVIDIA 535 / RTX 3060
 
 ## Running the Code
 
