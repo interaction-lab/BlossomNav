@@ -1,10 +1,10 @@
 # BlossomNav
-##Requirements##
+## Requirements
 - NodeJS and NPM Installed
 - MiniConda Installed
 - Python Installed
 
-##Installation and Configuration##
+## Installation and Configuration
 Clone the repository and its submodules (ZoeDepth):
 ```
 git clone --recurse-submodules https://github.com/interaction-lab/BlossomNav.git
