@@ -1,46 +1,69 @@
-// The URL of the streaming image
-const imageUrl = 'http://192.168.1.14:8081/';
+const axios = require('axios');
+const cheerio = require('cheerio');
+const fetch = require('node-fetch');
+const fs = require('fs');
+const path = require('path');
 
-// Create an Image object
-const image = new Image();
+// URL of the streaming page
+const pageUrl = '';
 
-// Set the crossOrigin attribute if needed (e.g., if the image is hosted on a different domain)
-image.crossOrigin = 'anonymous';
+// Function to fetch HTML content from a URL
+async function fetchPageHtml(url) {
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching the HTML content:', error);
+        return null;
+    }
+}
 
-// Set the image source to the streaming URL
-image.src = imageUrl;
+// Function to extract image URL from HTML
+function extractImageUrl(html) {
+    const $ = cheerio.load(html);
+    const imgElement = $('img');
+    return imgElement.attr('src');
+}
 
-// Once the image loads, draw it onto a canvas and trigger the download
-image.onload = function() {
-    // Create a canvas element
-    const canvas = document.createElement('canvas');
-    canvas.width = image.width;
-    canvas.height = image.height;
+// Function to download the image to a specified directory
+async function downloadImage(imageUrl, outputDir) {
+    try {
+        // Ensure imageUrl is a valid absolute URL
+        const absoluteUrl = new URL(imageUrl, pageUrl).toString();
 
-    // Get the canvas context
-    const ctx = canvas.getContext('2d');
+        const response = await fetch(absoluteUrl);
+        const buffer = await response.buffer();
 
-    // Draw the image onto the canvas
-    ctx.drawImage(image, 0, 0);
+        // Extracting filename from URL
+        const filename = path.basename(new URL(absoluteUrl).pathname);
 
-    // Convert the canvas content to a data URL
-    const dataUrl = canvas.toDataURL('image/jpeg'); // or 'image/png'
+        // Construct the output file path
+        const outputFilePath = path.join(outputDir, filename);
 
-    // Create a temporary anchor element
-    const link = document.createElement('a');
-    link.href = dataUrl;
-    link.download = 'downloaded_image.jpg'; // Specify the file name and extension
+        // Write the buffer to the specified directory
+        fs.writeFileSync(outputFilePath, buffer);
+        console.log('Image downloaded successfully to:', outputFilePath);
+    } catch (error) {
+        console.error('Error downloading the image:', error);
+    }
+}
 
-    // Append the anchor to the body
-    document.body.appendChild(link);
+// Main function to orchestrate the process
+async function main() {
+    const html = await fetchPageHtml(pageUrl);
+    if (html) {
+        const imageUrl = extractImageUrl(html);
+        if (imageUrl) {
+            console.log('Image URL found:', imageUrl);
+            const outputDir = '/home/anthony/InteractionsLab/BlossomNav/data/scrapped'; // Change this to your desired directory
+            await downloadImage(imageUrl, outputDir);
+        } else {
+            console.error('No image URL found in the HTML.');
+        }
+    } else {
+        console.error('Failed to fetch HTML content.');
+    }
+}
 
-    // Simulate a click on the anchor to trigger the download
-    link.click();
-
-    // Remove the anchor from the document
-    document.body.removeChild(link);
-};
-
-image.onerror = function() {
-    console.error('Error loading the image.');
-};
+// Execute the main function
+main();
