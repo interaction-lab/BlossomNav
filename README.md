@@ -38,5 +38,5 @@ python app.py
 ```
 Below is an image of the app's user interface. You can press Start to start recording and stop when you want to by pressing the stop button.
 <br />![Alt text](./_README/gui.png?raw=true "GUI")
-<br />Afterward, you can save the mp4 where you choose and follow the steps from **Upload MP4**
+<br />After hitting stop, you will get the following pop-up screen. We recommend saving the mp4 into the **data** folder and then following the steps from **Upload MP4**.
 <br />![Alt text](./_README/savescreen.png?raw=true "Save Screen")
