@@ -22,8 +22,6 @@ conda activate mononav
 You can run the following code if you want to use BlossomNav on a video (.mp4) on your local computer.
 ```
 cd utils
-```
-```
 python split.py video_file_path image_dir 10
 ```
 The **video_file_path** is the path to your video and the **image_dir** is the directory in which
