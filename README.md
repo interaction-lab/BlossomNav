@@ -32,7 +32,7 @@ cd .. // go back to the parent directory
 The **video_file_path** is the path to your video and the **image_dir** is the directory in which
 <br /> you want the images to be saved. 
 <br />
-### Using the Raspberry Pi Zero 2
+### Using the Raspberry Pi Zero 2:
 If you have set up the Raspberry Pi Zero 2, you can use our app to record videos to use in BlossomNav too.
 ```
 python app.py
