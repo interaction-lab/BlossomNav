@@ -36,7 +36,5 @@ If you have set up the Raspberry Pi Zero 2, you can also use our app to record v
 ```
 python app.py
 ```
-Below is an image of the app's user interface. You can press Start to start recording and stop when you want to by pressing the stop button.
-<br />![Alt text](./_README/gui.png?raw=true "GUI")
-<br />After hitting stop, you will get the following pop-up screen. We recommend saving the mp4 into the **data** folder and then following the steps from **Upload MP4**.
-<br />![Alt text](./_README/savescreen.png?raw=true "Save Screen")
+Below is an image of the app's user interface. You can press Start to start recording and stop when you want to by pressing the stop button. After hitting stop, you will get the following pop-up screen. We recommend saving the mp4 into the **data** folder and following the steps from **Upload MP4**.
+<br />![Alt text](./_README/gui.png?raw=true "GUI" =100x100) ![Alt text](./_README/savescreen.png?raw=true "Save Screen" =100x100)
