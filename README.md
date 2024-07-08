@@ -36,7 +36,7 @@ If you have set up the Raspberry Pi Zero 2, you can also use our app to record v
 ```
 python app.py
 ```
-Below is an image of the app's user interface. You can press Start to start recording and stop when you want to by pressing the stop button. After hitting stop, you will get the following pop-up screen. We recommend that you save the mp4 into the **data** folder and follow the steps from **Upload MP4**.
-Solarized dark                                |  Solarized Ocean
+Below is an image of the app's user interface. You can press Start to start recording and stop when you want to by pressing the stop button. After hitting stop, you will get the following pop-up screen. We recommend saving the mp4 into the **data** folder and following the steps from **Upload MP4**.
+User Interface                                |  Save Screen
 :--------------------------------------------:|:------------------------------------------------------------:
 ![Alt text](./_README/gui.png?raw=true "GUI") |  ![Alt text](./_README/savescreen.png?raw=true "Save Screen")
