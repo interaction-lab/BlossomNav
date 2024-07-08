@@ -1,10 +1,11 @@
 # BlossomNav
-## Software Requirements
+## Requirements
+### Software
 - NodeJS and NPM Installed
 - MiniConda Installed
 - Python Installed
 
-## Hardware Requirements
+### Hardware
 - Raspberry Pi Zero 2
 - Raspberry Pi Camera Rev 1.3
 
