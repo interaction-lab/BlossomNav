@@ -1,8 +1,12 @@
 # BlossomNav
-## Requirements
+## Software Requirements
 - NodeJS and NPM Installed
 - MiniConda Installed
 - Python Installed
+
+## Hardware Requirements
+- Raspberry Pi Zero 2
+- Raspberry Pi Camera Rev 1.3
 
 ## Installation and Configuration
 Clone the repository and its submodules (ZoeDepth):
