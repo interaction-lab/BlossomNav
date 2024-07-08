@@ -1,3 +1,24 @@
+"""
+__________.__                                      _______               
+\______   \  |   ____  ______ __________   _____   \      \ _____ ___  __
+ |    |  _/  |  /  _ \/  ___//  ___/  _ \ /     \  /   |   \\__  \\  \/ /
+ |    |   \  |_(  <_> )___ \ \___ (  <_> )  Y Y  \/    |    \/ __ \\   / 
+ |______  /____/\____/____  >____  >____/|__|_|  /\____|__  (____  /\_/  
+        \/                \/     \/            \/         \/     \/      
+
+Copyright (c) 2024 Interactions Lab
+License: MIT
+Authors: Anthony Song and Nathan Dennler, Cornell University & University of Southern California
+Project Page: https://github.com/interaction-lab/BlossomNav.git
+
+This script contains an GUI that allows recording video footage from the Pi Zero 2 and saving to local computer
+
+The following is saved to file ():
+│   ├── <[unspecified_name]> # video footage from the Pi Zero 2
+
+
+"""
+
 import tkinter as tk
 from tkinter import messagebox, filedialog
 import cv2
