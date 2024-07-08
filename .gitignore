@@ -162,5 +162,5 @@ cython_debug/
 #.idea/
 
 data/pixel-depth-images
-data/pixel-images
 data/pixel-rgb-images
+./test.py

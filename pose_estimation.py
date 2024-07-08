@@ -49,7 +49,7 @@ for frame in range(1, end_frame - 2): # first image has been set as ground truth
     new_image_depth = np.load(depth_dir + "/" + camera_source + "_frame-%06d.depth.npy"%(frame))
     ground_truth_d = ground_truth_depth.astype(np.int16)
     new_image_d = new_image_depth.astype(np.int16)
-    R, t = calculate_E_or_H(ground_truth, new_image)
+    R, t = calculate_E_or_H(ground_truth, new_image) # find Rotation and translation matrix
     print("--------------------------------------")
     print(frame - 1, frame)
     distance_traveled = calculate_distance_between_images(ground_truth_depth, new_image_depth, (config["fx"], config["fy"]), (config["cx"], config["cy"]))
@@ -57,8 +57,6 @@ for frame in range(1, end_frame - 2): # first image has been set as ground truth
     Open3D_matrix = convert_Rt_Open3D(R, scaled_t)
     Open3D_matrix[0][3], Open3D_matrix[1][3] = -Open3D_matrix[0][3], -Open3D_matrix[1][3] # Open3D is Right, Down, Front
                                                                                             # OpenCV is Left, Up, Front
-    # max_new = np.max(new_image_depth)
-    # max_ground = np.max(ground_truth_depth)
     delta_D = new_image_d - ground_truth_d
     if np.sum(delta_D < 0) / delta_D.size > 0.50 and Open3D_matrix[2][3] < 0:
         print("Reversed Forward & Backward")

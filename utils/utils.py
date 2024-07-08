@@ -27,11 +27,11 @@ def read_yaml(file_path='config.yaml'):
         config = yaml.safe_load(file)
     return config
 
+"""
+Obtains the camera intrinsics data from some .yaml file
+returns a matrix configuration of the data
+"""
 def camera_intrinsics():
-    """
-    Obtains the camera intrinsics data from some .yaml file
-    returns a matrix configuration of the data
-    """
     config = read_yaml()
     fx = config['fx']
     fy = config['fy']
@@ -43,16 +43,16 @@ def camera_intrinsics():
                 [0, fy, cy],
                 [0, 0, 1]])
 
+"""
+Calculate the symmetric transfer error of a homography matrix H.
+
+H: Homography matrix (3x3)
+points1: Array of original points (Nx2)
+points2: Array of transformed points (Nx2)
+
+Returns the symmetric transfer error as a scalar value.
+"""
 def homography_error(H, points1, points2):
-    """
-    Calculate the symmetric transfer error of a homography matrix H.
-
-    H: Homography matrix (3x3)
-    points1: Array of original points (Nx2)
-    points2: Array of transformed points (Nx2)
-
-    Returns the symmetric transfer error as a scalar value.
-    """
     # Convert points to homogeneous coordinates (add a column of ones)
     points1_h = np.hstack([points1, np.ones((len(points1), 1))])
     points2_h = np.hstack([points2, np.ones((len(points2), 1))])
@@ -70,16 +70,16 @@ def homography_error(H, points1, points2):
 
     return symmetric_error
 
+"""
+Calculate the symmetric transfer error of a essential matrix E.
+
+E: Essential matrix (3x3)
+points1: Array of original points (Nx2)
+points2: Array of transformed points (Nx2)
+
+Returns the symmetric transfer error as a scalar value.
+"""
 def essential_error(E, points1, points2):
-    """
-    Calculate the symmetric transfer error of a essential matrix E.
-
-    E: Essential matrix (3x3)
-    points1: Array of original points (Nx2)
-    points2: Array of transformed points (Nx2)
-
-    Returns the symmetric transfer error as a scalar value.
-    """
     # Obtain the camera intrinsics
     K = camera_intrinsics()
 
@@ -106,16 +106,17 @@ def essential_error(E, points1, points2):
 
     return symmetric_error
 
+"""
+Extracts ORB keypoints from the two frames and matches these keypoints
+
+file_path_1: File path to image 1 (ground truth image)
+file_path_2: File path to image 2
+draw: Draws the matches onto the images so that you can see the matches. 
+Default has been set to False
+
+returns the matched points as two list of coordinates
+"""
 def match_images(file_path_1, file_path_2, draw=False):
-    """
-    Extracts ORB keypoints from the two frames and matches these keypoints
-
-    file_path_1: File path to image 1 (ground truth image)
-    file_path_2: File path to image 2
-    draw: Draws the matches onto the images so that you can see the matches. Default has been set to False
-
-    returns the matched points as two list of coordinates
-    """
     # Read the two images
     img1 = cv2.imread(file_path_1)
     img2 = cv2.imread(file_path_2)
@@ -181,15 +182,44 @@ def match_images(file_path_1, file_path_2, draw=False):
 
     return img1_pts, img2_pts
 
+"""
+Calculates the region of similitude between two images.
+
+file_path_1: File path to image 1
+file_path_2: File path to image 2
+
+Returns two tuples, one for image 1 and one for image 2, with the 
+tuples containing the the top-left most pixel and the bottom-right 
+most pixel of the region of similitude.
+"""  
+# Rework algorithm to find the leftmost and rightmost in goodmatches from
+# match_images and take those coordinates to be the area of similitude between
+# the two images
+def find_similar_regions(img1_pts, img2_pts): 
+   smallest_index = 0
+   greatest_index = 0
+   smallest = img1_pts[0][0] + img1_pts[0][1]
+   greatest = img1_pts[0][0] + img1_pts[0][1]
+   for i in range(1, len(img1_pts)):
+       if img1_pts[i][0] + img1_pts[i][1] < smallest:
+          smallest = img1_pts[i][0] + img1_pts[i][1]
+          smallest_index = i
+       if img1_pts[i][0] + img1_pts[i][1] > greatest:
+           greatest = img1_pts[i][0] + img1_pts[i][1]
+           greatest_index = i
+   return img1_pts[smallest_index], img1_pts[greatest_index], img2_pts[smallest_index], img2_pts[greatest_index]
+
+"""
+Calculates, chooses, and decomposes the Essential Matrix or the 
+Homography based on symmetric transfer error.
+
+file_path_1: File path to image 1 (ground truth image)
+file_path_2: File path to image 2
+
+Returns two matrices, the Rotation (R) and Translation (t) matrices 
+in this order.
+"""
 def calculate_E_or_H(file_path_1, file_path_2, draw=False, preference=None):
-    """
-    Calculates, chooses, and decomposes the Essential Matrix or the Homography based on symmetric transfer error.
-
-    file_path_1: File path to image 1 (ground truth image)
-    file_path_2: File path to image 2
-
-    Returns two matrices, the Rotation (R) and Translation (t) matrices in this order.
-    """
     config = read_yaml()
     # get the camera intrinsics from config.yaml
     K = camera_intrinsics()
@@ -230,14 +260,15 @@ def calculate_E_or_H(file_path_1, file_path_2, draw=False, preference=None):
     else:
         print("Error. Moving To Next Frame!")
 
-def rotation_matrix_to_euler_angles(R):
-    """
-    Convert a rotation matrix to Euler angles (pitch, yaw, roll).
-    
-    R: 3x3 rotation matrix
 
-    Returns the pitch, yaw, and roll angles in radians.
-    """
+"""
+Convert a rotation matrix to Euler angles (pitch, yaw, roll).
+
+R: 3x3 rotation matrix
+
+Returns the pitch, yaw, and roll angles in radians.
+"""
+def rotation_matrix_to_euler_angles(R):
     sy = np.sqrt(R[0, 0]**2 + R[1, 0]**2)
 
     singular = sy < 1e-6
@@ -260,10 +291,10 @@ def convert_Rt_Open3D(R, t):
     T[:3, 3] = t.reshape(3)
     return T
 
-def calculate_3d_coordinates(depth_matrix, focal_length, principal_point):
     """
     Calculate the 3D coordinates for each pixel in the image using the depth matrix.
     """
+def calculate_3d_coordinates(depth_matrix, focal_length, principal_point):
     h, w = depth_matrix.shape
     fx, fy = focal_length
     cx, cy = principal_point
@@ -279,10 +310,10 @@ def calculate_3d_coordinates(depth_matrix, focal_length, principal_point):
 
     return X, Y, Z
 
+"""
+Calculate the average distance between corresponding points in two images using their depth matrices.
+"""
 def calculate_distance_between_images(depth_matrix1, depth_matrix2, focal_length, principal_point):
-    """
-    Calculate the average distance between corresponding points in two images using their depth matrices.
-    """
     X1, Y1, Z1 = calculate_3d_coordinates(depth_matrix1, focal_length, principal_point)
     X2, Y2, Z2 = calculate_3d_coordinates(depth_matrix2, focal_length, principal_point)
     
