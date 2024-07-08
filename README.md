@@ -18,7 +18,7 @@ conda activate mononav
 <br />Ubuntu 22.04 / NVIDIA 535 / RTX 3060
 
 ## Running the Code
-###Upload MP4:
+### Upload MP4:
 You can run the following code if you want to use BlossomNav on
 <br /> a video (.mp4) on your local computer.
 ```cd utils```
