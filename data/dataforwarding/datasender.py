@@ -1,23 +1,35 @@
 import socket
+import time
+from InvalidAddressError import *
+import re
 
-# Define the IP address and port of the Raspberry Pi
-raspberry_pi_ip = "192.168.1.100"  # Replace with the actual IP address of your Raspberry Pi
-raspberry_pi_port = 5005
+class datasender():
+    def __init__(self, ip, port):
+        InvalidAddressError.validate_ip(ip)
+        InvalidAddressError.validate_port(port)
 
-# Create a UDP socket
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        # Define the IP address and port of the Raspberry Pi
+        self._raspberry_pi_ip = ip  # Replace with the actual IP address of your Raspberry Pi
+        self._raspberry_pi_port = port
 
-# Define the data to be sent (string and numerical data)
-data_string = "Hello, Raspberry Pi!"
-data_number = 42
+        # Create a UDP socket
+        self._sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-# Convert the data to bytes
-data_to_send = f"{data_string},{data_number}".encode('utf-8')
+    def forward(self, information):
+        # Convert the data to bytes
+        data_to_send = f"{information}".encode('utf-8')
 
-# Send the data to the Raspberry Pi
-sock.sendto(data_to_send, (raspberry_pi_ip, raspberry_pi_port))
+        # Send the data to the Raspberry Pi
+        self._sock.sendto(data_to_send, (self._raspberry_pi_ip, self._raspberry_pi_port))
 
-print(f"Sent: {data_to_send}")
+        print(f"Sent: {data_to_send}")
 
-# Close the socket
-sock.close()
+    def close(self):
+        self._sock.close()
+    
+if __name__ == "__main__":
+    temp_datasender = datasender("192.168.1.14", 5005)
+    for i in range(100):
+        temp_datasender.forward(str(i))
+        time.sleep(1)
+    temp_datasender.close()
