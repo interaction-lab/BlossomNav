@@ -21,6 +21,7 @@ conda activate mononav
 ```
 **Tested On:** (release / driver / GPU)
 <br />Ubuntu 22.04 / NVIDIA 535 / RTX 3060
+<be />Ubuntu 20.04 / NVIDIA 535 / RTX 2060
 
 ## Running the Code
 ### Upload MP4:
