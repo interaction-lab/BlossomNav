@@ -18,7 +18,7 @@ This script is a joystick that will allow you to control the base for the Blosso
 import tkinter as tk
 import math
 
-from data.dataforwarding.datasender import datasender
+from dataforwarding.datasender import datasender
 
 class JoystickApp:
     def __init__(self):

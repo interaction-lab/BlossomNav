@@ -1,5 +1,4 @@
 from datacollections.gui import *
-from data.dataforwarding.datasender import datasender
 from datacollections.streamer import *
 from utils.utils import read_yaml
 
