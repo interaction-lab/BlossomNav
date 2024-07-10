@@ -22,7 +22,7 @@ from PIL import Image, ImageTk
 import threading
 import os
 
-from joystick import *
+from gui.joystick import *
 
 class VideoStreamApp:
     def __init__(self, root, rtsp_link):
@@ -84,7 +84,7 @@ class VideoStreamApp:
                     image_path = os.path.join(self.image_dir, f"frame_{self.frame_counter:05d}.png")
                     cv2.imwrite(image_path, self.current_frame)
                     self.frame_counter += 1
-        self.root.after(50, self.update_stream)  # Schedule the next update in 50 ms
+        self.root.after(100, self.update_stream)  # Schedule the next update in 100 ms
 
     def compile_video(self):
         filename = filedialog.asksaveasfilename(defaultextension=".mp4", filetypes=[("MP4 files", "*.mp4")])

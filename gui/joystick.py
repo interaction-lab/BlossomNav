@@ -18,6 +18,8 @@ This script is a joystick that will allow you to control the base for the Blosso
 import tkinter as tk
 import math
 
+from data.dataforwarding.datasender import datasender
+
 class JoystickApp:
     def __init__(self):
         self.root = None
@@ -60,6 +62,8 @@ class JoystickApp:
             self.drag_data = {"x": 0, "y": 0}
             self.is_dragging = False
 
+            self.forwarder = datasender("192.168.1.14", 5005)
+
             # Start updating coordinates
             self.update_coordinates()
 
@@ -68,6 +72,7 @@ class JoystickApp:
     
     def stop(self):
         if self.root:
+            self.forwarder.close()
             self.root.quit()  # Stop the Tkinter main loop
             self.root.destroy()  # Destroy the Tkinter window
             self.root = None
@@ -131,6 +136,8 @@ class JoystickApp:
 
             # Update the label
             self.coord_label.config(text=f"Coordinates: ({x_relative}, {y_relative})")
+
+            self.forwarder.forward(f"{x_relative},{y_relative}")
 
             # Schedule the next update
             self.root.after(100, self.update_coordinates)

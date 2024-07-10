@@ -17,7 +17,7 @@ This is the code that sends information from local host to a raspberry pi
 
 import socket
 import time
-from InvalidAddressError import *
+from data.dataforwarding.InvalidAddressError import *
 import re
 
 class datasender():
