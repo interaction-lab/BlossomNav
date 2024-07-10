@@ -22,7 +22,7 @@ from PIL import Image, ImageTk
 import threading
 import os
 
-from gui.joystick import *
+from datacollections.joystick import *
 
 class VideoStreamApp:
     def __init__(self, root, rtsp_link):

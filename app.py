@@ -1,13 +1,18 @@
-from gui.record import *
+from datacollections.gui import *
 from data.dataforwarding.datasender import datasender
-from gui.record2 import *
+from datacollections.streamer import *
+from utils.utils import read_yaml
 
-val = 0
+CONFIG_PATH = "config.yaml"
+config = read_yaml(CONFIG_PATH)
+streaming_url = config["streaming_url"]
 
-if val == 1:
+gui = 0
+
+if gui == 1:
     root = tk.Tk()
-    app = VideoStreamApp(root, 'http://192.168.1.14:8081/')
+    app = VideoStreamApp(root, streaming_url)
     root.mainloop()
 else: 
-    x = StreamRecorder("http://192.168.1.14:8081/")
+    x = StreamRecorder(streaming_url)
     x.run()

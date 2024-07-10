@@ -36,3 +36,6 @@ goal_position: # goal position in meters
  -  10.0 # +Z FORWARD
 min_dist2obs: 0.5 # minimum acceptable distance from obstacles, meters (for primitive selection)
 min_dist2goal: 1.0 # termination condition for reaching the goal, meters
+
+# App Settings
+streaming_url: 'http://192.168.1.14:8081/'

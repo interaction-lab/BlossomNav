@@ -3,10 +3,10 @@ import os
 import threading
 from getkey import getkey, keys
 
-from gui.joystick import *
+from datacollections.joystick import *
 
 class StreamRecorder:
-    def __init__(self, url, output_file="output.mp4", fps=15):
+    def __init__(self, url, output_file="output.mp4", fps=30):
         self.url = url
         self.output_file = output_file
         self.fps = fps
@@ -17,9 +17,10 @@ class StreamRecorder:
         self.joystick_running = False
 
     def start_recording(self):
-        if not os.path.exists("recordings"):
-            os.makedirs("recordings")
-        output_path = os.path.join("recordings", self.output_file)
+        path = "data/recordings"
+        if not os.path.exists(path):
+            os.makedirs(path)
+        output_path = os.path.join(path, self.output_file)
         self.recording_process = subprocess.Popen([
             "ffmpeg",
             "-y",  # Overwrite output files without asking
