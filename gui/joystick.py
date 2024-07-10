@@ -1,42 +1,76 @@
+"""
+__________.__                                      _______               
+\______   \  |   ____  ______ __________   _____   \      \ _____ ___  __
+ |    |  _/  |  /  _ \/  ___//  ___/  _ \ /     \  /   |   \\__  \\  \/ /
+ |    |   \  |_(  <_> )___ \ \___ (  <_> )  Y Y  \/    |    \/ __ \\   / 
+ |______  /____/\____/____  >____  >____/|__|_|  /\____|__  (____  /\_/  
+        \/                \/     \/            \/         \/     \/      
+
+Copyright (c) 2024 Interactions Lab
+License: MIT
+Authors: Anthony Song and Nathan Dennler, Cornell University & University of Southern California
+Project Page: https://github.com/interaction-lab/BlossomNav.git
+
+This script is a joystick that will allow you to control the base for the Blossom
+
+"""
+
 import tkinter as tk
 import math
 
 class JoystickApp:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("2D Joystick")
-        self.canvas = tk.Canvas(root, width=540, height=540, bg="black")
-        self.canvas.pack()
+    def __init__(self):
+        self.root = None
+        self.canvas = None
+        self.coord_label = None
+        self.small_circle = None
 
-        self.radius_big = 250
-        self.radius_small = 40
-        self.center_x = 270
-        self.center_y = 270
+    def start(self):
+        if self.root is None:
+            self.root = tk.Tk()
+            self.root.title("2D Joystick")
+            self.canvas = tk.Canvas(self.root, width=540, height=540, bg="black")
+            self.canvas.pack()
 
-        # Draw the big circle
-        self.canvas.create_oval(self.center_x - self.radius_big, self.center_y - self.radius_big,
-                                self.center_x + self.radius_big, self.center_y + self.radius_big,
-                                outline="white", width=2)
+            self.radius_big = 250
+            self.radius_small = 40
+            self.center_x = 270
+            self.center_y = 270
 
-        # Draw the small circle
-        self.small_circle = self.canvas.create_oval(self.center_x - self.radius_small, self.center_y - self.radius_small,
-                                                    self.center_x + self.radius_small, self.center_y + self.radius_small,
-                                                    fill="white")
 
-        # Add a label to display coordinates
-        self.coord_label = tk.Label(root, text="Coordinates: (0, 0)", fg="white", bg="black", font=("Helvetica", 16))
-        self.coord_label.pack()
+            # Draw the big circle
+            self.canvas.create_oval(self.center_x - self.radius_big, self.center_y - self.radius_big,
+                                    self.center_x + self.radius_big, self.center_y + self.radius_big,
+                                    outline="white", width=2)
 
-        # Bind mouse events
-        self.canvas.tag_bind(self.small_circle, "<Button-1>", self.on_click)
-        self.canvas.tag_bind(self.small_circle, "<B1-Motion>", self.on_drag)
-        self.canvas.tag_bind(self.small_circle, "<ButtonRelease-1>", self.on_release)
+            # Draw the small circle
+            self.small_circle = self.canvas.create_oval(self.center_x - self.radius_small, self.center_y - self.radius_small,
+                                                        self.center_x + self.radius_small, self.center_y + self.radius_small,
+                                                        fill="white")
 
-        self.drag_data = {"x": 0, "y": 0}
-        self.is_dragging = False
+            # Add a label to display coordinates
+            self.coord_label = tk.Label(self.root, text="Coordinates: (0, 0)", fg="white", bg="black", font=("Helvetica", 16))
+            self.coord_label.pack()
 
-        # Start updating coordinates
-        self.update_coordinates()
+            # Bind mouse events
+            self.canvas.tag_bind(self.small_circle, "<Button-1>", self.on_click)
+            self.canvas.tag_bind(self.small_circle, "<B1-Motion>", self.on_drag)
+            self.canvas.tag_bind(self.small_circle, "<ButtonRelease-1>", self.on_release)
+
+            self.drag_data = {"x": 0, "y": 0}
+            self.is_dragging = False
+
+            # Start updating coordinates
+            self.update_coordinates()
+
+            # Run the Tkinter main loop
+            self.root.mainloop()
+    
+    def stop(self):
+        if self.root:
+            self.root.quit()  # Stop the Tkinter main loop
+            self.root.destroy()  # Destroy the Tkinter window
+            self.root = None
 
     def on_click(self, event):
         # Store the mouse drag data
@@ -85,22 +119,23 @@ class JoystickApp:
                            self.center_x + self.radius_small, self.center_y + self.radius_small)
 
     def update_coordinates(self):
-        # Get the current coordinates of the small circle
-        coords = self.canvas.coords(self.small_circle)
-        x_center = (coords[0] + coords[2]) / 2
-        y_center = (coords[1] + coords[3]) / 2
+        if self.root:
+            # Get the current coordinates of the small circle
+            coords = self.canvas.coords(self.small_circle)
+            x_center = (coords[0] + coords[2]) / 2
+            y_center = (coords[1] + coords[3]) / 2
 
-        # Calculate the position relative to the origin
-        x_relative = round(x_center - self.center_x)
-        y_relative = round(self.center_y - y_center)
+            # Calculate the position relative to the origin
+            x_relative = round(x_center - self.center_x)
+            y_relative = round(self.center_y - y_center)
 
-        # Update the label
-        self.coord_label.config(text=f"Coordinates: ({x_relative}, {y_relative})")
+            # Update the label
+            self.coord_label.config(text=f"Coordinates: ({x_relative}, {y_relative})")
 
-        # Schedule the next update
-        self.root.after(100, self.update_coordinates)
+            # Schedule the next update
+            self.root.after(100, self.update_coordinates)
 
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = JoystickApp(root)
-    root.mainloop()
+    app = JoystickApp()
+    app.start()
+    app.stop()

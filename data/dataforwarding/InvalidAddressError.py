@@ -1,3 +1,20 @@
+"""
+__________.__                                      _______               
+\______   \  |   ____  ______ __________   _____   \      \ _____ ___  __
+ |    |  _/  |  /  _ \/  ___//  ___/  _ \ /     \  /   |   \\__  \\  \/ /
+ |    |   \  |_(  <_> )___ \ \___ (  <_> )  Y Y  \/    |    \/ __ \\   / 
+ |______  /____/\____/____  >____  >____/|__|_|  /\____|__  (____  /\_/  
+        \/                \/     \/            \/         \/     \/      
+
+Copyright (c) 2024 Interactions Lab
+License: MIT
+Authors: Anthony Song and Nathan Dennler, Cornell University & University of Southern California
+Project Page: https://github.com/interaction-lab/BlossomNav.git
+
+This is an exception for if the IP address and the port are not valid
+
+"""
+
 import socket
 import time
 import re

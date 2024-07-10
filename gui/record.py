@@ -13,10 +13,6 @@ Project Page: https://github.com/interaction-lab/BlossomNav.git
 
 This script contains an GUI that allows recording video footage from the Pi Zero 2 and saving to local computer
 
-The following is saved to file ():
-│   ├── <[unspecified_name]> # video footage from the Pi Zero 2
-
-
 """
 
 import tkinter as tk
@@ -25,6 +21,8 @@ import cv2
 from PIL import Image, ImageTk
 import threading
 import os
+
+from joystick import *
 
 class VideoStreamApp:
     def __init__(self, root, rtsp_link):
@@ -50,16 +48,20 @@ class VideoStreamApp:
         self.capture_thread = threading.Thread(target=self.capture_frames)
         self.capture_thread.start()
         self.update_stream()  # Start the stream update loop
+        self.joystick = JoystickApp()
 
     def start_saving(self):
         if not self.saving:
             self.saving = True
             self.frame_counter = 0
             messagebox.showinfo("Info", "Started saving frames")
+            self.joystick.start()
+        
 
     def stop_saving(self):
         if self.saving:
             self.saving = False
+            self.joystick.stop()
             messagebox.showinfo("Info", "Stopped saving frames")
             self.compile_video()
 
