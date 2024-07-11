@@ -88,6 +88,3 @@ finally:
 
     # close the socket
     sock.close()
-
-            
-finally:
