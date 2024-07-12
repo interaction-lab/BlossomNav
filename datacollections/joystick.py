@@ -29,7 +29,7 @@ class JoystickApp:
         self.canvas = None
         self.coord_label = None
         self.small_circle = None
-        CONFIG_PATH = "../config.yaml"
+        CONFIG_PATH = "config.yaml"
         config = read_yaml(CONFIG_PATH)
         self.count = 0
         self.teleop_dir = config["teleop_dir"]
@@ -147,7 +147,7 @@ class JoystickApp:
 
             self.forwarder.forward(f"{x_relative},{y_relative}")
 
-            path = self.teleop_dir + "_teleop-%06d.txt"%(self.count)
+            path = self.teleop_dir + "/teleop-%06d.txt"%(self.count)
             saved_value = np.array([x_relative, y_relative])
             np.savetxt(path, saved_value)
 
