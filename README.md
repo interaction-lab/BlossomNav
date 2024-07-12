@@ -26,18 +26,27 @@ conda activate mononav
 ## Data Collection Tool
 ### Setting up the Raspberry Pi Zero 2 and Rev 1.3 Camera
 ### Using the Raspberry Pi Zero 2:
-If you have set up the Raspberry Pi Zero 2 and Rev 1.3 Camera, you can use one of our two methods to download images from the pi camera. 
-#### (1) Python Based
-First go into the app.py file and choose whether you want a GUI by setting ```GUI = 0``` or ```GUI = 1``` in the file. **Note, we recommend turning GUI off to decrease latency in case you want to teleoperate the robot with the joystick**. Then you can run:
+If you have set up the Raspberry Pi Zero 2 and Rev 1.3 Camera, you can use one of our three methods to download images from the pi camera. Two of the methods use Python and one of them uses Javascript. For the Python methods, one does not have a GUI and the other does. **Note, we recommend turning GUI off to decrease latency if you want to teleoperate the robot with our joystick**.
+#### (1) Python Based - No GUI
+First, go into the app.py file and set ```GUI = 0```.  After, run:
 ```
 python app.py
 ```
-Below is an image of the app's user interface. You can press Start to start recording and stop when you want to by pressing the stop button. After hitting stop, you will get the following pop-up screen. We recommend saving the mp4 into the **data** folder and following the steps from **Upload MP4**.
+Use ```Ctrl + L``` to start recording. A joystick will pop up allowing you to teleoperate a robot. 
+#### (2) Python Based - GUI
+First, go into the app.py file and set ```GUI = 1```.  After, run:
+```
+python app.py
+```
+Below is an image of the app's user interface. You can press Start to start recording and teleoperating the robot using our joystick. Pressing the stop button will stop the recording and terminate teleoperation. After hitting stop, you will be prompted on where to save the video recording. We recommend saving the mp4 into the **data** folder.
 User Interface                                |  Save Screen
 :--------------------------------------------:|:------------------------------------------------------------:
 ![Alt text](./_README/gui.png?raw=true "GUI") |  ![Alt text](./_README/savescreen.png?raw=true "Save Screen")
 #### (2) JS Based
-
+To use the downloadImage javascript file, run:
+```
+node downloadImage.js
+```
 
 ## Localization and Mapping Tools
 ### Using an MP4:
