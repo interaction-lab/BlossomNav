@@ -383,7 +383,7 @@ class VoxelBlockGrid:
             attr_channels=(1, 1, 3),
             voxel_size=3.0 / 64, # this sets the resolution of the voxel grid
             block_resolution=1,
-            block_count=50000,
+            block_count=500000,
             device=device)
 
     def integration_step(self, color, depth_numpy, cam_pose):

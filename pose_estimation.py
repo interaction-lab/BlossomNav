@@ -51,7 +51,7 @@ for frame in range(1, end_frame - 2): # first image has been set as ground truth
     ground_truth_d = ground_truth_depth.astype(np.int16)
     new_image_d = new_image_depth.astype(np.int16)
     R, t = calculate_E_or_H(ground_truth, new_image) # find Rotation and translation matrix
-    print("--------------------------------------")
+    print("---------------------------------------------------------")
     print(frame - 1, frame)
     distance_traveled = calculate_distance_between_images(ground_truth_depth, new_image_depth, (config["fx"], config["fy"]), (config["cx"], config["cy"]))
     scaled_t = distance_traveled * 0.001 * t
@@ -60,18 +60,15 @@ for frame in range(1, end_frame - 2): # first image has been set as ground truth
     Open3D_matrix[0][3], Open3D_matrix[1][3] = -Open3D_matrix[0][3], -Open3D_matrix[1][3] # Open3D is Right, Down, Front
                                                                                             # OpenCV is Left, Up, Front
     delta_D = new_image_d - ground_truth_d
-    if np.sum(delta_D < 0) / delta_D.size > 0.50 and Open3D_matrix[2][3] < 0:
-        print("Reversed Forward & Backward")
+    print(pitch)
+    if abs(pitch) > 0.20: # rolling at least 10+ degrees
+        if (np.sum(delta_D > 0) / delta_D.size) > 0.50 and Open3D_matrix[2][3] < 0:
+            print("Turn - Reversed Forward & Backward")
+            Open3D_matrix[2][3] =  -Open3D_matrix[2][3]
+    #else:
+    if (np.sum(delta_D < 0) / delta_D.size) > 0.50 and Open3D_matrix[2][3] < 0:
+        print("Nonturn - Reversed Forward & Backward")
         Open3D_matrix[2][3] = -Open3D_matrix[2][3]
-    if abs(pitch) > 0.10:
-        print("Turning corner")
-        print(Open3D_matrix[2][3])
-        if Open3D_matrix[2][3] < 0:
-            Open3D_matrix[0][3] = 0.0001 * Open3D_matrix[0][3]
-            Open3D_matrix[1][3] = 0.0001 * Open3D_matrix[1][3]
-            Open3D_matrix[2][3] = 0.0001 * Open3D_matrix[2][3] 
-        else:
-            Open3D_matrix[2][3] = 4 * Open3D_matrix[2][3]
     print(Open3D_matrix)
     curr_state = curr_state @ Open3D_matrix
     file_name = camera_source + "_frame-%06d.pose.txt"%(frame-1)
