@@ -52,6 +52,8 @@ To use the downloadImage javascript file, run:
 node downloadImage.js
 ```
 This option does not yet have a joystick.
+#### Joystick Information
+[joystick.webm](https://github.com/user-attachments/assets/b111f9dd-f4b0-4e2f-aa10-ce3e5d1576a8)
 
 ## Localization and Mapping Tools
 ### Using an MP4:
