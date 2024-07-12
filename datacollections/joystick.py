@@ -17,8 +17,11 @@ This script is a joystick that will allow you to control the base for the Blosso
 
 import tkinter as tk
 import math
+import os   
+import numpy as np
 
 from dataforwarding.datasender import datasender
+from utils.utils import read_yaml
 
 class JoystickApp:
     def __init__(self):
@@ -26,6 +29,11 @@ class JoystickApp:
         self.canvas = None
         self.coord_label = None
         self.small_circle = None
+        CONFIG_PATH = "../config.yaml"
+        config = read_yaml(CONFIG_PATH)
+        self.count = 0
+        self.teleop_dir = config["teleop_dir"]
+        os.mkdir(self.teleop_dir) if not os.path.exists(self.teleop_dir) else None
 
     def start(self):
         if self.root is None:
@@ -139,7 +147,12 @@ class JoystickApp:
 
             self.forwarder.forward(f"{x_relative},{y_relative}")
 
-            # Schedule the next update
+            path = self.teleop_dir + "_teleop-%06d.txt"%(self.count)
+            saved_value = np.array([x_relative, y_relative])
+            np.savetxt(path, saved_value)
+
+            self.count += 1
+
             self.root.after(100, self.update_coordinates)
 
 if __name__ == "__main__":
