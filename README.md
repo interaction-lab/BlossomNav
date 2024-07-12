@@ -19,6 +19,10 @@ Install the dependencies from conda:
 conda env create -n blossomnav --file environment.yml
 conda activate mononav
 ```
+Move to the stable branch:
+```
+git checkout stable
+```
 **Tested On:** (release / driver / GPU)
 <br />Ubuntu 22.04 / NVIDIA 535 / RTX 3060
 <br />Ubuntu 20.04 / NVIDIA 535 / RTX 2060
