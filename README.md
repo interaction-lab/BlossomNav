@@ -3,8 +3,7 @@
 ### Software
 - Python
 - MiniConda / Anaconda
-<br />Not necessary, unless the JavaScript Image Downloader is needed
-- NodeJS & NPM
+- NodeJS & NPM (Not necessary unless want to use JS in data collection)
 
 ### Hardware
 - Raspberry Pi Zero 2
