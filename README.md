@@ -3,7 +3,7 @@
 ### Software
 - Python
 - MiniConda / Anaconda
-Not necessary, unless the JavaScript Image Downloader is needed
+<br />Not necessary, unless the JavaScript Image Downloader is needed
 - NodeJS & NPM
 
 ### Hardware
