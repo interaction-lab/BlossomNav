@@ -23,7 +23,8 @@ conda activate mononav
 <br />Ubuntu 22.04 / NVIDIA 535 / RTX 3060
 <br />Ubuntu 20.04 / NVIDIA 535 / RTX 2060
 
-## Data Collection Tools
+## Data Collection Tool
+### Setting up the Raspberry Pi Zero 2
 ### Using the Raspberry Pi Zero 2:
 If you have set up the Raspberry Pi Zero 2, you can also use our one of our two methods to record videos to record from the pi. First go into the app.py file and choose whether you want a GUI by setting ```GUI = 0``` or ```GUI = 1``` in the file. **Note, we recommend turning GUI off to decrease latency in case you want to teleoperate the robot with the joystick**. Then you can run:
 ```
