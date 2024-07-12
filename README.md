@@ -24,9 +24,11 @@ conda activate mononav
 <br />Ubuntu 20.04 / NVIDIA 535 / RTX 2060
 
 ## Data Collection Tool
-### Setting up the Raspberry Pi Zero 2
+### Setting up the Raspberry Pi Zero 2 and Rev 1.3 Camera
 ### Using the Raspberry Pi Zero 2:
-If you have set up the Raspberry Pi Zero 2, you can also use our one of our two methods to record videos to record from the pi. First go into the app.py file and choose whether you want a GUI by setting ```GUI = 0``` or ```GUI = 1``` in the file. **Note, we recommend turning GUI off to decrease latency in case you want to teleoperate the robot with the joystick**. Then you can run:
+If you have set up the Raspberry Pi Zero 2 and Rev 1.3 Camera, you can use one of our two methods to download images from the pi camera. 
+#### (1) Python Based
+First go into the app.py file and choose whether you want a GUI by setting ```GUI = 0``` or ```GUI = 1``` in the file. **Note, we recommend turning GUI off to decrease latency in case you want to teleoperate the robot with the joystick**. Then you can run:
 ```
 python app.py
 ```
@@ -34,6 +36,7 @@ Below is an image of the app's user interface. You can press Start to start reco
 User Interface                                |  Save Screen
 :--------------------------------------------:|:------------------------------------------------------------:
 ![Alt text](./_README/gui.png?raw=true "GUI") |  ![Alt text](./_README/savescreen.png?raw=true "Save Screen")
+#### (2) JS Based
 
 
 ## Localization and Mapping Tools
