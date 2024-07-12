@@ -44,6 +44,6 @@ User Interface                                |  Save Screen
 ![Alt text](./_README/gui.png?raw=true "GUI") |  ![Alt text](./_README/savescreen.png?raw=true "Save Screen")
 
 ## Acknowledgements
-<br />This work is heavily inspired by following works: 
+This work is heavily inspired by following works: 
 <br />**Intelligent Robot Motion Lab, Princeton Unviersity** - [MonoNav](https://github.com/natesimon/MonoNav)
 <br />**felixchenfy** - Monocular-Visual-Odometry - [Monocular-Visual-Odometry](https://github.com/felixchenfy/Monocular-Visual-Odometry)
