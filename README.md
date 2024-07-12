@@ -42,7 +42,7 @@ Below is an image of the app's user interface. You can press Start to start reco
 User Interface                                |  Save Screen
 :--------------------------------------------:|:------------------------------------------------------------:
 ![Alt text](./_README/gui.png?raw=true "GUI") |  ![Alt text](./_README/savescreen.png?raw=true "Save Screen")
-#### (2) JS Based
+#### (3) JS Based
 To use the downloadImage javascript file, run:
 ```
 node downloadImage.js
