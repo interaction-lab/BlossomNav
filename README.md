@@ -26,7 +26,7 @@ conda activate mononav
 ## Data Collection Tool
 ### Setting up the Raspberry Pi Zero 2 and Rev 1.3 Camera
 ### Using the Raspberry Pi Zero 2:
-If you have set up the Raspberry Pi Zero 2 and Rev 1.3 Camera, you can use one of our three methods to download images from the pi camera. Two of the methods use Python and one of them uses Javascript. For the Python methods, one does not have a GUI and the other does. **Note, we recommend turning GUI off to decrease latency if you want to teleoperate the robot with our joystick**.
+If you have set up the Raspberry Pi Zero 2 and Rev 1.3 Camera, you can use one of our three methods to download images from the pi camera. Two of the methods use Python and one of them uses Javascript (JS). For the Python methods, one does not have a GUI and the other does. **Note, we recommend turning GUI off to decrease latency if you want to teleoperate the robot with our joystick**.
 #### (1) Python Based - No GUI
 First, go into the app.py file and set ```GUI = 0```.  After, run:
 ```
