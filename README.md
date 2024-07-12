@@ -28,7 +28,7 @@ git checkout stable
 <br />Ubuntu 20.04 / NVIDIA 535 / RTX 2060
 
 ## Data Collection Tool
-### Setting up the Raspberry Pi Zero 2 and Rev 1.3 Camera
+### Setting Up the Hardware
 ### Using the Raspberry Pi Zero 2:
 If you have set up the Raspberry Pi Zero 2 and Rev 1.3 Camera, you can use one of our three methods to download images from the pi camera. Two of the methods use Python and one of them uses Javascript (JS). For the Python methods, one has a GUI and the other does not. **We recommend turning GUI off to decrease latency if you want to teleoperate the robot with our joystick**.
 #### (1) Python Based - No GUI
@@ -36,13 +36,13 @@ First, go into the ```app.py``` file and set ```GUI = 0```.  After, run:
 ```
 python app.py
 ```
-Use ```Ctrl + L``` to start recording. A joystick will pop up allowing you to teleoperate a robot. Use ```Ctrl + C``` to exit the program and save the recording. The recording will be saved to the directory specified in ```config.yaml```.
+Use ```Ctrl + L``` to start recording. A joystick will pop up allowing you to teleoperate a robot. Use ```Ctrl + C``` to exit the program and save the recording. The recording will be saved as output.mp4 to the directory specified at ```vid_dir``` in ```config.yaml```. The commands from the joystick will be saved as a txt to the directory specified at ```teleop_dir``` in ```config.yaml```.
 #### (2) Python Based - GUI
 First, go into the ```app.py``` file and set ```GUI = 1```.  After, run:
 ```
 python app.py
 ```
-Below is an image of the app's user interface. You can press Start to start recording and teleoperating the robot using our joystick. Pressing the stop button will stop the recording and terminate teleoperation. After hitting stop, you will be prompted on where to save the video recording. We recommend saving the mp4 into the **data** folder.
+Below is an image of the app's user interface. You can press Start to start recording and teleoperating the robot using our joystick. Pressing the stop button will stop the recording and terminate teleoperation. After hitting stop, you will be prompted on where to save the video recording. **We recommend saving the mp4 into the **data** folder**. The commands from the joystick will be saved as a txt to the directory specified at ```teleop_dir``` in ```config.yaml```.
 User Interface                                |  Save Screen
 :--------------------------------------------:|:------------------------------------------------------------:
 ![Alt text](./_README/gui.png?raw=true "GUI") |  ![Alt text](./_README/savescreen.png?raw=true "Save Screen")
@@ -51,6 +51,7 @@ To use the downloadImage javascript file, run:
 ```
 node downloadImage.js
 ```
+This option does not yet have a joystick.
 
 ## Localization and Mapping Tools
 ### Using an MP4:
@@ -60,7 +61,7 @@ cd utils
 python split.py video_file_path image_dir 10
 cd .. // go back to the parent directory
 ```
-The **video_file_path** is the path to your video, and the **image_dir** is the directory in which you want the images to be saved. The last input of split is the occurence of saving an image. In this case the 10 means that a image is saved every 10 frames. We recommend playing around with this last parameter. 
+The **video_file_path** is the path to your video, and the **image_dir** is the directory in which you want the images to be saved. The last input of split is the occurence of saving an image. In this case the 10 means that a image is saved every 10 frames. **We recommend playing around with this last parameter**.
 <br />
 
 ## Acknowledgements
