@@ -39,13 +39,13 @@ class JoystickApp:
         if self.root is None:
             self.root = tk.Tk()
             self.root.title("2D Joystick")
-            self.canvas = tk.Canvas(self.root, width=540, height=540, bg="black")
+            self.canvas = tk.Canvas(self.root, width=620, height=620, bg="black")
             self.canvas.pack()
 
-            self.radius_big = 250
+            self.radius_big = 290
             self.radius_small = 40
-            self.center_x = 270
-            self.center_y = 270
+            self.center_x = 310
+            self.center_y = 310
 
 
             # Draw the big circle
@@ -139,8 +139,8 @@ class JoystickApp:
             y_center = (coords[1] + coords[3]) / 2
 
             # Calculate the position relative to the origin
-            x_relative = round(x_center - self.center_x)
-            y_relative = round(self.center_y - y_center)
+            x_relative = round(x_center - self.center_x) / 250
+            y_relative = round(self.center_y - y_center) / 250
 
             # Update the label
             self.coord_label.config(text=f"Coordinates: ({x_relative}, {y_relative})")
@@ -149,7 +149,7 @@ class JoystickApp:
 
             path = self.teleop_dir + "/teleop-%06d.txt"%(self.count)
             saved_value = np.array([x_relative, y_relative])
-            np.savetxt(path, saved_value)
+            #np.savetxt(path, saved_value)
 
             self.count += 1
 
