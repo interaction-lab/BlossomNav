@@ -27,10 +27,9 @@ git checkout stable
 <br />Ubuntu 22.04 / NVIDIA 535 / RTX 3060
 <br />Ubuntu 20.04 / NVIDIA 535 / RTX 2060
 
-## Data Collection Tool
-### Setting Up the Hardware
+## BlossomNav: Data Collection Tools
 ### Using the Raspberry Pi Zero 2:
-If you have set up the Raspberry Pi Zero 2 and Rev 1.3 Camera, you can use one of our three methods to download images from the pi camera. Two of the methods use Python and one of them uses Javascript (JS). For the Python methods, one has a GUI and the other does not. **We recommend turning GUI off to decrease latency if you want to teleoperate the robot with our joystick**.
+If you have set up the Raspberry Pi Zero 2 and Rev 1.3 Camera and other necessary hardware, you can use one of our three methods to download images from the pi camera. If not, please checkout the hardware section. Two of the methods use Python and one of them uses Javascript (JS). For the Python methods, one has a GUI and the other does not. **We recommend turning GUI off to decrease latency if you want to teleoperate the robot with our joystick**.
 #### (1) Python Based - No GUI
 First, go into the ```app.py``` file and set ```GUI = 0```.  After, run:
 ```
@@ -55,11 +54,8 @@ This option does not yet have a joystick.
 #### Joystick Information
 [joystick.webm](https://github.com/user-attachments/assets/b111f9dd-f4b0-4e2f-aa10-ce3e5d1576a8)
 
-## Localization and Mapping Tools
-### Using an MP4:
-Before you run BlossomNav's localization and mapping tools remember to calibrate your camera instrinsics. We have provided code to calibrate the intrinsics as well as directions on how to use the code in the **Camera Calibration** section. **If you have a specific .mp4 video you want BlossomNav to run on, you can save the video file to the data folder under ```data/videos```**.
-
-### Video Parsing Tool
+## BlossomNav: Video Parsing & Merging Tools
+### Video Parsing
 To use our video parsing tool, run:
 ```
 cd utils
@@ -68,10 +64,15 @@ cd .. // go back to the parent directory
 ```
 The **video_file_path** is the path to your video, and the **image_dir** is the directory in which you want the images to be saved. The last input of split is the occurence of saving an image. In this case the 10 means that a image is saved every 10 frames. **We recommend playing around with this last parameter**.
 <br />
+### Video Merging
 
-### Depth Estimation Tool
+## BlossomNav: Localization & Mapping Tools
+### Using an MP4:
+Before you run BlossomNav's localization and mapping tools remember to calibrate your camera instrinsics. We have provided code to calibrate the intrinsics. Directions can be found at the **Camera Calibration** section. **If you have a specific .mp4 video you want BlossomNav to run on, you can save the video file to the data folder under ```data/videos```**.
 
-### Map Creation / Localization Tool
+### Depth Estimation
+
+### Map Creation / Localization
 
 ## Camera Calibration
 
