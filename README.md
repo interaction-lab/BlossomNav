@@ -73,16 +73,28 @@ cd utils
 python merge.py image_frame_path output_dir 10
 cd .. // go back to the parent directory
 ```
-The **image_frame_path** is the path to your image frames, and the **output_dir** is the directory in which you want the merged .mp4 video to be saved. The last input of split is the frames per second.**We recommend playing around with this last parameter**.
+The **image_frame_path** is the path to your image frames, and the **output_dir** is the directory in which you want the merged .mp4 video to be saved. The last input of split is the frames per second. **We recommend playing around with this last parameter**.
 <br />
 
 ## BlossomNav: Localization & Mapping Tools
-### Using an MP4:
-Before you run BlossomNav's localization and mapping tools remember to calibrate your camera instrinsics. We have provided code to calibrate the intrinsics. Directions can be found at the **Camera Calibration** section. **If you have a specific .mp4 video you want BlossomNav to run on, you can save the video file to the data folder under ```data/videos```**.
+Before you run BlossomNav's localization and mapping tools remember to calibrate your camera instrinsics. We have provided code to calibrate the intrinsics and directions can be found under the **Camera Calibration** section. **Camera calibration is crucial for depth estimation accuracy**. Also, if you have a specific .mp4 video you want BlossomNav to run on, you can save the video file to the data folder under ```data/recordings```**.
 
 ### Depth Estimation
+BlossomNav uses Intel's ZoeDepth model to estimate depth information from images. You can find the ZoeDepth model, scripts, etc under the ```ZoeDepth``` folder. To estimate depth, run 
+```
+python estimate_depth.py
+```
+This script reads in images from the directory specified at ```data_dir``` in ```config.yaml``` and transforms them to match the camera intrinsics used in the ZoeDepth training dataset. These transformed images are saved in a directory called ```<camera_source>-rgb-images``` which are then used to estimate depth. Estimated depths are saved as numpy arrays and colormaps in ```<camera_source>-depth-image```.
+
+### Pose Estimation
+BlossomNav attempts to estimate position using visual odometry. Most of the visual odometry functions can be found and changed at ```utils/utils.py``` if needed. To estimate a robots position, run 
+```
+python estimate_depth.py
+```
+This script uses the images stored at the path specified by ```data_dir``` in ```config.yaml``` to estimate a non-scaled rotation and translation matrix between two images. Then the script uses the depth arrays calculated stored at ```<camera_source>-depth-images``` to scale the matrices to real world metrics. Finally it estimates ground truth positions from the relative positions and transforms them into a 4 x 4 matrix that Open3D can use to create maps. The positions are stored as txts at ```<camera_source>-depth-images```.
 
 ### Map Creation / Localization
+
 
 ## Camera Calibration
 
