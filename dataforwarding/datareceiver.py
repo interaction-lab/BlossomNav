@@ -60,19 +60,24 @@ try:
         rws = -1 * (y_coor - x_coor)
         try:
             if (lws < 0):
-                pwm1.ChangeDutyCycle( (1 + lws) * MAX_SPEED )
+                speed = max(min( (1 + lws) * MAX_SPEED , 100), 0)
+                pwm1.ChangeDutyCycle( speed )
                 GPIO.output( gpio_pin1, GPIO.HIGH )
             else:
-                pwm1.ChangeDutyCycle( lws * MAX_SPEED )
+                speed = max(min( ( lws ) * MAX_SPEED , 100), 0)
+                pwm1.ChangeDutyCycle( speed )
                 GPIO.output( gpio_pin1, GPIO.LOW )
             if (rws < 0):
-                pwm2.ChangeDutyCycle( (1 + rws) * MAX_SPEED )
+                speed = max(min( (1 + rws) * MAX_SPEED , 100), 0)
+                pwm2.ChangeDutyCycle( speed )
                 GPIO.output( gpio_pin2, GPIO.HIGH )
             else: 
+                speed = max(min( (1 + rws) * MAX_SPEED , 100), 0)
                 pwm2.ChangeDutyCycle( rws * MAX_SPEED )
                 GPIO.output( gpio_pin2, GPIO.LOW )  
         except ValueError as e:
             print(e)
+        time.sleep(0.1)
 finally:
     # stop PWM
     pwm1.stop()

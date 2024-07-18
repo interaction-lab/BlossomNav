@@ -57,8 +57,8 @@ for frame in range(1, end_frame - 2): # first image has been set as ground truth
     scaled_t = distance_traveled * 0.001 * t
     pitch, yaw, roll = rotation_matrix_to_euler_angles(R)
     Open3D_matrix = convert_Rt_Open3D(R, scaled_t)
-    Open3D_matrix[0][3], Open3D_matrix[1][3] = -Open3D_matrix[0][3], -Open3D_matrix[1][3] # Open3D is Right, Down, Front
-                                                                                            # OpenCV is Left, Up, Front
+    Open3D_matrix[1][3] = -Open3D_matrix[1][3]
+
     delta_D = new_image_d - ground_truth_d
     print(pitch)
     if abs(pitch) > 0.20: # rolling at least 10+ degrees
