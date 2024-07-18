@@ -52,8 +52,7 @@ node downloadImage.js
 ```
 This option does not yet have a joystick.
 #### Joystick Information
-Below is a video of our joystick. You can use your mouse to drag the inner circle within the outer circle. The joystick will send the x, y coordinates of the inner circle to the raspberry pi. The joystick will also snap back to (0, 0) if it does not sense that a mouse is dragging it. The code for the joystick can be found at ```datacollections/joystick.py``` supposing you want to change it to fit your system.
-<br />[joystick.webm](https://github.com/user-attachments/assets/b111f9dd-f4b0-4e2f-aa10-ce3e5d1576a8)
+[joystick.webm](https://github.com/user-attachments/assets/b111f9dd-f4b0-4e2f-aa10-ce3e5d1576a8)
 
 ## BlossomNav: Video Parsing & Merging Tools
 ### Video Parsing
