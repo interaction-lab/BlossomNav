@@ -41,7 +41,7 @@ First, go into the ```app.py``` file and set ```GUI = 1```.  After, run:
 ```
 python app.py
 ```
-Below is an image of the app's user interface. You can press Start to start recording and teleoperating the robot using our joystick. Pressing the stop button will stop the recording and terminate teleoperation. After hitting stop, you will be prompted on where to save the video recording. **We recommend saving the mp4 into the **data** folder**. The commands from the joystick will be saved as a txt to the directory specified at ```teleop_dir``` in ```config.yaml```.
+Below is an image of the app's user interface. You can press Start to start recording and teleoperating the robot using our joystick. Pressing the stop button will stop the recording and terminate teleoperation. After hitting stop, you will be prompted on where to save the video recording. **We recommend saving the mp4 into the **data** folder. The commands from the joystick will be saved as a txt to the directory specified at ```teleop_dir``` in ```config.yaml```.
 User Interface                                |  Save Screen
 :--------------------------------------------:|:------------------------------------------------------------:
 ![Alt text](./_README/gui.png?raw=true "GUI") |  ![Alt text](./_README/savescreen.png?raw=true "Save Screen")
@@ -67,6 +67,14 @@ cd .. // go back to the parent directory
 The **video_file_path** is the path to your video, and the **image_dir** is the directory in which you want the images to be saved. The last input of split is the occurence of saving an image. In this case the 10 means that a image is saved every 10 frames. **We recommend playing around with this last parameter**.
 <br />
 ### Video Merging
+To use our video merging tool, run:
+```
+cd utils
+python merge.py image_frame_path output_dir 10
+cd .. // go back to the parent directory
+```
+The **image_frame_path** is the path to your image frames, and the **output_dir** is the directory in which you want the merged .mp4 video to be saved. The last input of split is the frames per second.**We recommend playing around with this last parameter**.
+<br />
 
 ## BlossomNav: Localization & Mapping Tools
 ### Using an MP4:
