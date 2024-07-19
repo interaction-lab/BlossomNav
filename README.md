@@ -80,7 +80,7 @@ The **image_frame_path** is the path to your image frames, and the **output_dir*
 Before you run BlossomNav's localization and mapping tools remember to calibrate your camera instrinsics. We have provided code to calibrate the intrinsics and directions can be found under the **Camera Calibration** section. **Camera calibration is crucial for depth estimation accuracy**. Also, if you have a specific .mp4 video you want BlossomNav to run on, you can save the video file to the data folder under ```data/recordings```**.
 
 ### Depth Estimation
-BlossomNav uses Intel's ZoeDepth model to estimate depth information from images. You can find the ZoeDepth model, scripts, etc under the ```ZoeDepth``` folder. To estimate depth, run 
+BlossomNav uses Intel's ZoeDepth model to estimate depth information from images. You can find the ZoeDepth model, scripts, etc under the ```ZoeDepth``` folder. To estimate depth, run: 
 ```
 python estimate_depth.py
 ```
@@ -94,7 +94,14 @@ BlossomNav attempts to estimate position using visual odometry. Most of the visu
 ```
 python estimate_depth.py
 ```
-This script uses the images stored at the path specified by ```data_dir``` in ```config.yaml``` to estimate a non-scaled rotation and translation matrix between two images. Then the script uses the depth arrays calculated stored at ```<camera_source>-depth-images``` to scale the matrices to real world metrics. Finally it estimates ground truth positions from the relative positions and transforms them into a 4 x 4 matrix that Open3D can use to create maps. The positions are stored as txts at ```<camera_source>-depth-images```.
+This script uses the images stored at the path specified by ```data_dir``` in ```config.yaml``` to estimate a non-scaled rotation and translation matrix between two images. Then the script uses the depth arrays calculated stored at ```<camera_source>-depth-images``` to scale the matrices to real world metrics. Finally it estimates ground truth positions from the relative positions and transforms them into a 4 x 4 matrix that Open3D can use to create maps. The positions are stored as txts at ```<camera_source>-depth-images```. 
+<br />The Saved Open3D poses .txt should look something like this:
+```
+9.997392317919935323e-01 -4.179400429904072192e-03 -2.244996721601764944e-02 -4.362497266418206149e-02
+4.391199003202964080e-03 9.999462406613749410e-01 9.393250688446225932e-03 -8.801827270860801411e-02
+2.240950216466347511e-02 -9.489383500959187867e-03 9.997038390510983863e-01 1.948284960918448938e+00
+0.000000000000000000e+00 0.000000000000000000e+00 0.000000000000000000e+00 1.000000000000000000e+00
+```
 
 ### Map Creation / Localization
 
