@@ -87,7 +87,7 @@ python estimate_depth.py
 This script reads in images from the directory specified at ```data_dir``` in ```config.yaml``` and transforms them to match the camera intrinsics used in the ZoeDepth training dataset. These transformed images are saved in a directory called ```<camera_source>-rgb-images``` which are then used to estimate depth. Estimated depths are saved as numpy arrays and colormaps in ```<camera_source>-depth-image```.
 Original Image                                          |  Transformed Image                                                 |  Depth Colormap
 :------------------------------------------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------:
-![Alt text](./_![Uploading original.jpg…]()             | ![Alt text](./_README/transformed.png?raw=true "Transformed") | ![Alt text](./_README/depthcolormap.png?raw=true "Depth")
+![Alt text](./_README/original.png?raw=true "Original") |  ![Alt text](./_README/transformed.png?raw=true "Transformed")     |  ![Alt text](./_README/depthcolormap.png?raw=true "Depth")
 
 ### Pose Estimation
 BlossomNav attempts to estimate position using visual odometry. Most of the visual odometry functions can be found and changed at ```utils/utils.py``` if needed. To estimate a robots position, run 
