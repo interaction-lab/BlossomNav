@@ -95,6 +95,7 @@ BlossomNav attempts to estimate position using visual odometry. Most of the visu
 python estimate_depth.py
 ```
 This script uses the images stored at the path specified by ```data_dir``` in ```config.yaml``` to estimate a non-scaled rotation and translation matrix between two images. Then the script uses the depth arrays calculated stored at ```<camera_source>-depth-images``` to scale the matrices to real world metrics. Finally it estimates ground truth positions from the relative positions and transforms them into a 4 x 4 matrix that Open3D can use to create maps. The positions are stored as txts at ```<camera_source>-depth-images```. 
+
 <br />The Saved Open3D poses .txt should look something like this:
 ```
 9.997392317919935323e-01 -4.179400429904072192e-03 -2.244996721601764944e-02 -4.362497266418206149e-02
