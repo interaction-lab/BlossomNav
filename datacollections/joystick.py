@@ -17,8 +17,11 @@ This script is a joystick that will allow you to control the base for the Blosso
 
 import tkinter as tk
 import math
+import os   
+import numpy as np
 
 from dataforwarding.datasender import datasender
+from utils.utils import read_yaml
 
 class JoystickApp:
     def __init__(self):
@@ -26,18 +29,23 @@ class JoystickApp:
         self.canvas = None
         self.coord_label = None
         self.small_circle = None
+        CONFIG_PATH = "config.yaml"
+        config = read_yaml(CONFIG_PATH)
+        self.count = 0
+        self.teleop_dir = config["teleop_dir"]
+        os.mkdir(self.teleop_dir) if not os.path.exists(self.teleop_dir) else None
 
     def start(self):
         if self.root is None:
             self.root = tk.Tk()
             self.root.title("2D Joystick")
-            self.canvas = tk.Canvas(self.root, width=540, height=540, bg="black")
+            self.canvas = tk.Canvas(self.root, width=620, height=620, bg="black")
             self.canvas.pack()
 
-            self.radius_big = 250
+            self.radius_big = 290
             self.radius_small = 40
-            self.center_x = 270
-            self.center_y = 270
+            self.center_x = 310
+            self.center_y = 310
 
 
             # Draw the big circle
@@ -131,15 +139,20 @@ class JoystickApp:
             y_center = (coords[1] + coords[3]) / 2
 
             # Calculate the position relative to the origin
-            x_relative = round(x_center - self.center_x)
-            y_relative = round(self.center_y - y_center)
+            x_relative = round(x_center - self.center_x) / 250
+            y_relative = round(self.center_y - y_center) / 250
 
             # Update the label
             self.coord_label.config(text=f"Coordinates: ({x_relative}, {y_relative})")
 
             self.forwarder.forward(f"{x_relative},{y_relative}")
 
-            # Schedule the next update
+            path = self.teleop_dir + "/teleop-%06d.txt"%(self.count)
+            saved_value = np.array([x_relative, y_relative])
+            #np.savetxt(path, saved_value)
+
+            self.count += 1
+
             self.root.after(100, self.update_coordinates)
 
 if __name__ == "__main__":

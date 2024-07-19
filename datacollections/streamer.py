@@ -4,6 +4,7 @@ import threading
 from getkey import getkey, keys
 
 from datacollections.joystick import *
+from utils.utils import read_yaml
 
 class StreamRecorder:
     def __init__(self, url, output_file="output.mp4", fps=30):
@@ -17,7 +18,9 @@ class StreamRecorder:
         self.joystick_running = False
 
     def start_recording(self):
-        path = "data/recordings"
+        CONFIG_PATH = "config.yaml"
+        config = read_yaml(CONFIG_PATH)
+        path = config["vid_dir"]
         if not os.path.exists(path):
             os.makedirs(path)
         output_path = os.path.join(path, self.output_file)

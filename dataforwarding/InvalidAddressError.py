@@ -15,8 +15,6 @@ This is an exception for if the IP address and the port are not valid
 
 """
 
-import socket
-import time
 import re
 
 class InvalidAddressError(Exception):

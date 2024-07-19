@@ -39,3 +39,5 @@ min_dist2goal: 1.0 # termination condition for reaching the goal, meters
 
 # App Settings
 streaming_url: 'http://192.168.1.14:8081/'
+vid_dir: 'data/recordings'
+teleop_dir: 'data/teleop'

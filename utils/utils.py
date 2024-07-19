@@ -232,33 +232,15 @@ def calculate_E_or_H(file_path_1, file_path_2, draw=False, preference=None):
                                 img2_pts, K,
                                 method=cv2.RANSAC, prob=0.999, threshold=1)
 
-    H, Homography_Mask = cv2.findHomography(img1_pts, img2_pts, cv2.RANSAC,5.0)
-
     # computing Rotational (R) matrix and Translational (t) matrix from Essential Matrix (E)
     _, R_E, t_E, _ = cv2.recoverPose(E, img1_pts, img2_pts)
 
     if R_E is None or t_E is None:
         raise ValueError("Pose recovery failed")
     
-    # decompose the homography matrix
-    _, R_H, t_H, N_H = cv2.decomposeHomographyMat(H, K)
-
-    # Convert keypoint coordinates to an input filterHomographyDecompByVisibleRefPoints likes
-    kp1_pts_float32 = np.array(img1_pts, dtype=np.float32)[:, np.newaxis, :]
-    kp2_pts_float32 = np.array(img2_pts, dtype=np.float32)[:, np.newaxis, :]
-
-    # Find the two best Rotation and translation matrices from the four different solutions in the Homography Matrix
-    filtered = cv2.filterHomographyDecompByVisibleRefpoints(R_H, N_H, kp1_pts_float32, kp2_pts_float32)
     print("Symmetric Error for Essential Matrix", essential_error(E, img1_pts, img2_pts))
-    print("Symmetric Error for Homography Matrix", homography_error(H, img1_pts, img2_pts))
 
-
-    if preference == "E" or (preference == None and essential_error(E, img1_pts, img2_pts) < homography_error(H, img1_pts, img2_pts)):
-        return R_E, t_E
-    elif preference == "H" or (preference == None and essential_error(E, img1_pts, img2_pts) > homography_error(H, img1_pts, img2_pts)):
-        return filtered
-    else:
-        print("Error. Moving To Next Frame!")
+    return R_E, t_E
 
 
 """
@@ -381,9 +363,9 @@ class VoxelBlockGrid:
             attr_names=('tsdf', 'weight', 'color'),
             attr_dtypes=(o3c.float32, o3c.float32, o3c.float32),
             attr_channels=(1, 1, 3),
-            voxel_size=3.0 / 64, # this sets the resolution of the voxel grid
+            voxel_size=2.0 / 64, # this sets the resolution of the voxel grid
             block_resolution=1,
-            block_count=50000,
+            block_count=1000000,
             device=device)
 
     def integration_step(self, color, depth_numpy, cam_pose):
