@@ -110,4 +110,5 @@ This script uses the images stored at the path specified by ```data_dir``` in ``
 ## Acknowledgements
 This work is heavily inspired by following works: 
 <br />**Intelligent Robot Motion Lab, Princeton Unviersity** - [MonoNav](https://github.com/natesimon/MonoNav)
-<br />**felixchenfy** - Monocular-Visual-Odometry - [Monocular-Visual-Odometry](https://github.com/felixchenfy/Monocular-Visual-Odometry)
+<br />**felixchenfy** - [Monocular-Visual-Odometry](https://github.com/felixchenfy/Monocular-Visual-Odometry)
+<br />**isl-org** - [ZoeDepth](https://github.com/isl-org/ZoeDepth)
