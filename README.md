@@ -80,21 +80,27 @@ The **image_frame_path** is the path to your image frames, and the **output_dir*
 Before you run BlossomNav's localization and mapping tools remember to calibrate your camera instrinsics. We have provided code to calibrate the intrinsics and directions can be found under the **Camera Calibration** section. **Camera calibration is crucial for depth estimation accuracy**. Also, if you have a specific .mp4 video you want BlossomNav to run on, you can save the video file to the data folder under ```data/recordings```**.
 
 ### Depth Estimation
-BlossomNav uses Intel's ZoeDepth model to estimate depth information from images. You can find the ZoeDepth model, scripts, etc under the ```ZoeDepth``` folder. To estimate depth, run 
+BlossomNav uses Intel's ZoeDepth model to estimate depth information from images. You can find the ZoeDepth model, scripts, etc under the ```ZoeDepth``` folder. To estimate depth, run: 
 ```
 python estimate_depth.py
 ```
 This script reads in images from the directory specified at ```data_dir``` in ```config.yaml``` and transforms them to match the camera intrinsics used in the ZoeDepth training dataset. These transformed images are saved in a directory called ```<camera_source>-rgb-images``` which are then used to estimate depth. Estimated depths are saved as numpy arrays and colormaps in ```<camera_source>-depth-image```.
-Original Image                                     |  Transformed Image                                            |  Depth Colormap
-:-------------------------------------------------:|:-------------------------------------------------------------:|:------------------------------------------------------------:
-![Alt text](./_README/original.png?raw=true "GUI") | ![Alt text](./_README/transformed.png?raw=true "Save Screen") | ![Alt text](./_README/depthcolormap.png?raw=true "Save Screen")
+Original Image                                          |  Transformed Image                                                 |  Depth Colormap
+:------------------------------------------------------:|:------------------------------------------------------------------:|:------------------------------------------------------------:
+![Alt text](./_README/original.jpg?raw=true "Original") |  ![Alt text](./_README/transformed.jpg?raw=true "Transformed")     |  ![Alt text](./_README/depthcolormap.jpg?raw=true "Depth")
 
 ### Pose Estimation
 BlossomNav attempts to estimate position using visual odometry. Most of the visual odometry functions can be found and changed at ```utils/utils.py``` if needed. To estimate a robots position, run 
 ```
 python estimate_depth.py
 ```
-This script uses the images stored at the path specified by ```data_dir``` in ```config.yaml``` to estimate a non-scaled rotation and translation matrix between two images. Then the script uses the depth arrays calculated stored at ```<camera_source>-depth-images``` to scale the matrices to real world metrics. Finally it estimates ground truth positions from the relative positions and transforms them into a 4 x 4 matrix that Open3D can use to create maps. The positions are stored as txts at ```<camera_source>-depth-images```.
+This script uses the images stored at the path specified by ```data_dir``` in ```config.yaml``` to estimate a non-scaled rotation and translation matrix between two images. Then the script uses the depth arrays calculated stored at ```<camera_source>-depth-images``` to scale the matrices to real world metrics. Finally it estimates ground truth positions from the relative positions and transforms them into a 4 x 4 matrix that Open3D can use to create maps. The positions are stored as txts at ```<camera_source>-depth-images```. **To make sure the pose estimation works, the Open3D poses .txt should all look something like this (below)**:
+```
+9.997392317919935323e-01 -4.179400429904072192e-03 -2.244996721601764944e-02 -4.362497266418206149e-02
+4.391199003202964080e-03 9.999462406613749410e-01 9.393250688446225932e-03 -8.801827270860801411e-02
+2.240950216466347511e-02 -9.489383500959187867e-03 9.997038390510983863e-01 1.948284960918448938e+00
+0.000000000000000000e+00 0.000000000000000000e+00 0.000000000000000000e+00 1.000000000000000000e+00
+```
 
 ### Map Creation / Localization
 
@@ -104,4 +110,6 @@ This script uses the images stored at the path specified by ```data_dir``` in ``
 ## Acknowledgements
 This work is heavily inspired by following works: 
 <br />**Intelligent Robot Motion Lab, Princeton Unviersity** - [MonoNav](https://github.com/natesimon/MonoNav)
-<br />**felixchenfy** - Monocular-Visual-Odometry - [Monocular-Visual-Odometry](https://github.com/felixchenfy/Monocular-Visual-Odometry)
+<br />**felixchenfy** - [Monocular-Visual-Odometry](https://github.com/felixchenfy/Monocular-Visual-Odometry)
+<br />**isl-org** - [ZoeDepth](https://github.com/isl-org/ZoeDepth)
+<br />**hrc2** - [blossom-public](https://github.com/hrc2/blossom-public)
