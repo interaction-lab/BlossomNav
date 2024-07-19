@@ -19,6 +19,7 @@ dependencies:
   - torchaudio=0.13.1
   - torchvision=0.14.1
   - ffmpeg=5.1.2
+  - python3-tk
   - pip:
     - huggingface-hub==0.11.1
     - timm==0.6.12
@@ -29,3 +30,4 @@ dependencies:
     - Pillow==9.4.0 # mononav 
     - PyYAML==5.4.1 # mononav
     - trimesh==3.22.1 # mononav
+    - getkey # app

@@ -16,8 +16,11 @@ This script allows users to merge multiple .jpeg images into a videos
 """
 import cv2
 import os
+import sys
+from utils import read_yaml
 
 def merge_video(frame_folder, output_path, fps):
+    os.mkdir(output_path) if not os.path.exists(output_path) else None
     frame_files = sorted([f for f in os.listdir(frame_folder) if f.endswith('.jpg')])
     frame = cv2.imread(os.path.join(frame_folder, frame_files[0]))
     height, width, _ = frame.shape
@@ -31,8 +34,18 @@ def merge_video(frame_folder, output_path, fps):
 
     out.release()
 
-# Example usage:
-frame_folder = './image_preprocessing/kinect-rgb-images'
-output_path = './videos/processed_video.mp4'
-fps = 25  # Frames per second
-merge_video(frame_folder, output_path, fps)
+def main():
+    # Check if enough arguments are provided
+    if len(sys.argv) < 3:
+        print("Usage: python merge.py <frame_folder> <output_path> <fps>")
+        return
+
+    # Get the arguments from the command line
+    frame_folder = sys.argv[1]
+    output_path = sys.argv[2]
+    fps = int(sys.argv[3])
+
+    merge_video(frame_folder, output_path, fps)
+
+if __name__ == "__main__":
+    main()

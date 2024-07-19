@@ -1,7 +1,6 @@
 import socket
 import RPi.GPIO as GPIO
 import time
-import math
 
 # Set up the GPIO pin numbering mode
 GPIO.setmode(GPIO.BCM)
