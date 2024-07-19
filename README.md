@@ -112,3 +112,4 @@ This work is heavily inspired by following works:
 <br />**Intelligent Robot Motion Lab, Princeton Unviersity** - [MonoNav](https://github.com/natesimon/MonoNav)
 <br />**felixchenfy** - [Monocular-Visual-Odometry](https://github.com/felixchenfy/Monocular-Visual-Odometry)
 <br />**isl-org** - [ZoeDepth](https://github.com/isl-org/ZoeDepth)
+<br />**hrc2** - [blossom-public](https://github.com/hrc2/blossom-public)
