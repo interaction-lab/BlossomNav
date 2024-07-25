@@ -103,7 +103,11 @@ This script uses the images stored at the path specified by ```data_dir``` in ``
 ```
 
 ### Map Creation / Localization
-
+To illustrate the fusion process, run the script:
+```
+python fuse_depth.py
+```
+The program processes the transformed images from depth estimation, the poses from visual odometry, and depths from the ZoeDepth model, and integrates them using Open3D's TSDF Fusion. Once finished, it will display a reconstruction with coordinate frames indicating the camera poses during the operation. The reconstruction will be saved as a VoxelBlockGrid file ```vbg.npz``` and a point cloud file ```pointcloud.ply```, which can be viewed in MeshLab.
 
 ## Camera Calibration
 
