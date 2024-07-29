@@ -118,7 +118,8 @@ The stable branch comes with images that you can run these three python scripts 
 ```
 
 You should also get the following result from MeshLab:
-![Open3D Creation](./_README/mapping.gif)
+![mapping](https://github.com/user-attachments/assets/96527946-96d1-4f44-9b95-103ee26a266e)
+
 
 ## Camera Calibration
 In order to have correct metric depth estimation accuracy in the ZoeDepth model, we must transform the input image to match the intrinsics of the training dataset. ZoeDepth is trained on [NYU-Depth-v2](https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html), which used the Microsoft [Kinect](https://en.wikipedia.org/wiki/Kinect). 
