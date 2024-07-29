@@ -1,4 +1,12 @@
-# BlossomNav
+# BlossomNav: A Software Suite for Mobile Socially Assistive Robots
+**Authors**: [Anthony Song](https://anthonybsong.github.io/) and [Nathan Dennler](https://ndennler.github.io/)
+
+_[Interaction Lab](https://uscinteractionlab.web.app/), University of Southern California_
+
+[Project Page]() | [Projet Poster](./_README/BlossomNav_Poster.pdf)
+
+---
+
 ## Requirements
 ### Software
 - Python
