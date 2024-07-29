@@ -147,7 +147,7 @@ We provide scripts to generate `intrinsics.json` for your own camera. Steps to c
 5. `transform.py`: Adapted from [MonoNav](https://github.com/natesimon/MonoNav). This script loads the intrinsics from `intrinsics.json` and transforms your `calibration_pictures` to the Kinect's dimensions (640x480) and intrinsics. This operation may involve resizing your image. The transformed images are saved in `utils/calibration/transform_output` and should be inspected.
 
 ## Hardware Configuration
-BlossomNaav's hardware setup can be found on our website.
+BlossomNav's hardware setup can be found on our website.
 
 ## Acknowledgements
 This work is heavily inspired by following works: 
