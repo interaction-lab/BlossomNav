@@ -118,7 +118,7 @@ The stable branch comes with images that you can run these three python scripts 
 ```
 
 You should also get the following result from MeshLab:
-![mapping](https://github.com/user-attachments/assets/96527946-96d1-4f44-9b95-103ee26a266e)
+<br />![mapping](https://github.com/user-attachments/assets/96527946-96d1-4f44-9b95-103ee26a266e)
 
 
 ## Camera Calibration
