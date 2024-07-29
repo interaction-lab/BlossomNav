@@ -65,7 +65,6 @@ for frame in range(1, end_frame - 2): # first image has been set as ground truth
         if (np.sum(delta_D > 0) / delta_D.size) > 0.50 and Open3D_matrix[2][3] < 0:
             print("Turn - Reversed Forward & Backward")
             Open3D_matrix[2][3] =  -Open3D_matrix[2][3]
-    #else:
     if (np.sum(delta_D < 0) / delta_D.size) > 0.50 and Open3D_matrix[2][3] < 0:
         print("Nonturn - Reversed Forward & Backward")
         Open3D_matrix[2][3] = -Open3D_matrix[2][3]
