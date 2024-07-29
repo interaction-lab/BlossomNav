@@ -128,8 +128,7 @@ If you need to find where this is being done, ```utils/utils.py``` has the `tran
 
 We provide scripts to generate `intrinsics.json` for your own camera. Steps to calibrate:
 
-1. Take a video of a chessboard using ```app.py```. An example video can be found below.
-<br /> [![Calibration Video](https://www.youtube.com/watch?v=7N9aFjwYUy0&ab_channel=AnthonySong/0.jpg)](https://www.youtube.com/watch?v=7N9aFjwYUy0&ab_channel=AnthonySong)
+1. Take a video of a chessboard using ```app.py```. An example video can be found [here](https://www.youtube.com/watch?v=7N9aFjwYUy0&ab_channel=AnthonySong)
 3. Use ```split.py``` to split the video into frames.
 4. Use `calibrate.py`: Based on the [OpenCV sample](https://github.com/opencv/opencv/blob/4.x/samples/python/calibrate.py).You need to provide several arguments, including the structure and dimensions of your chessboard target. Example:
     ```
