@@ -3,9 +3,10 @@
 
 _[Interaction Lab](https://uscinteractionlab.web.app/), University of Southern California_
 
-[Project Page]() | [Projet Poster](./_README/BlossomNav_Poster.pdf)
+[Project Page]() | [Poster](./_README/BlossomNav_Poster.pdf) | [Video] () |
 
 ---
+Socially assistive robotics (SAR) aims to provide emotional, cognitive, and social support through robotic interactions. Despite the potential benefits, research and development in highly mobile SAR are limited, and existing solutions are often expensive and complex. BlossomNav aim to create hardware setup and software suite for SAR that is more affordable and user-friendly. It also aims to provide a base for future development of Visual SLAM software in the field of SAR by providing localization and mapping tools for robots that have built in cameras but do not have inertial measurement units (common in the field).
 
 ## Requirements
 ### Software
