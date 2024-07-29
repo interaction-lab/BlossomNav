@@ -124,19 +124,20 @@ You should also get the following result from MeshLab:
 ## Camera Calibration
 In order to have correct metric depth estimation accuracy in the ZoeDepth model, we must transform the input image to match the intrinsics of the training dataset. ZoeDepth is trained on [NYU-Depth-v2](https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html), which used the Microsoft [Kinect](https://en.wikipedia.org/wiki/Kinect). 
 
-If you need to find where this is being done, ```utils/utils.py``` have the `transform_image()` which performs resizing the image and undistorting it to match the Kinect's intrinsics.
+If you need to find where this is being done, ```utils/utils.py``` has the `transform_image()` which performs resizing the image and undistorting it to match the Kinect's intrinsics.
 
 We provide scripts to generate `intrinsics.json` for your own camera. Steps to calibrate:
 
 1. Take a video of a chessboard using ```app.py```. An example video can be found below.
-2. Use ```split.py``` to split the video into frames.
-3. Use `calibrate.py`: Based on the [OpenCV sample](https://github.com/opencv/opencv/blob/4.x/samples/python/calibrate.py).You need to provide several arguments, including the structure and dimensions of your chessboard target. Example:
+<br /> [![Calibration Video](https://youtu.be/7N9aFjwYUy0)
+3. Use ```split.py``` to split the video into frames.
+4. Use `calibrate.py`: Based on the [OpenCV sample](https://github.com/opencv/opencv/blob/4.x/samples/python/calibrate.py).You need to provide several arguments, including the structure and dimensions of your chessboard target. Example:
     ```
     MonoNav/utils/calibration$ python calibrate.py -w 6 -h 8 -t chessboard --square_size=35 ./calibration_pictures/frame*.jpg
 
     ```
     The intrinsics are printed and saved to `utils/calibration/intrinsics.json`.
-4. `transform.py`: Adapted from [MonoNav](https://github.com/natesimon/MonoNav). This script loads the intrinsics from `intrinsics.json` and transforms your `calibration_pictures` to the Kinect's dimensions (640x480) and intrinsics. This operation may involve resizing your image. The transformed images are saved in `utils/calibration/transform_output` and should be inspected.
+5. `transform.py`: Adapted from [MonoNav](https://github.com/natesimon/MonoNav). This script loads the intrinsics from `intrinsics.json` and transforms your `calibration_pictures` to the Kinect's dimensions (640x480) and intrinsics. This operation may involve resizing your image. The transformed images are saved in `utils/calibration/transform_output` and should be inspected.
 
 ## Acknowledgements
 This work is heavily inspired by following works: 
