@@ -1,1 +1,160 @@
-<h1>Hello!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Page Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black; /* Entire website background set to black */
+            color: white; /* Default text color set to white */
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 14px;
+        }
+        .navbar .brand {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .navbar .nav-links {
+            display: flex;
+            padding-right: 20px; /* Add padding to move buttons to the left */
+        }
+        .navbar .nav-links a {
+            margin-left: 15px;
+        }
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 80vh; /* Shrink the photo a bit */
+            background: url('_README/BlossomNav_Beatles.png') no-repeat center center/cover;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, black 100%);
+        }
+        .content-container {
+            background-color: #333; /* Dark grey background for the container */
+            padding: 20px; /* Padding for spacing */
+            border-radius: 15px; /* Rounded corners */
+            margin: 10px 20px 20px 20px; /* Margin for correct positioning */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Box shadow for better visual separation */
+        }
+        .section {
+            padding: 10px 20px 20px; /* Padding inside the sections */
+            margin: 0; /* No margin between sections */
+        }
+        .section h1, .section p {
+            margin: 0; /* Remove default margin */
+        }
+        .section h1 {
+            padding-top: 10px; /* Add padding to compensate for removed margin */
+        }
+        .section p {
+            margin-top: 10px; /* Add margin between <h1> and <p> */
+            font-size: 18px; /* Increase font size for paragraph text */
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 87.5%; /* 7/8 the width of the container */
+            background: #000;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .navbar.white a, .navbar.white .brand {
+            color: black;
+        }
+        .navbar.dark a, .navbar.dark .brand {
+            color: white;
+        }
+    </style>
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            const hero = document.querySelector('.hero');
+            const rect = hero.getBoundingClientRect();
+            if (rect.bottom <= 0) {
+                navbar.classList.remove('white');
+                navbar.classList.add('dark');
+            } else {
+                navbar.classList.remove('dark');
+                navbar.classList.add('white');
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="hero">
+        <div class="navbar white">
+            <div class="brand">BlossomNav</div>
+            <div class="nav-links">
+                <a href="#overview">Overview</a>
+                <a href="#hardware">Hardware</a>
+                <a href="#software">Software</a>
+                <a href="#team">Team</a>
+                <a href="#contact">Contact Us</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <div id="overview" class="section overview">
+            <h1>Overview</h1>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/rhi56NDJ_fc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p>This is a description of the video and some additional information about the overview section.</p>
+        </div>
+        <div id="hardware" class="section hardware">
+            <h1>Hardware</h1>
+            <p>Content for the hardware section goes here.</p>
+        </div>
+        <div id="software" class="section software">
+            <h1>Software</h1>
+            <p>Content for the software section goes here.</p>
+        </div>
+        <div id="team" class="section team">
+            <h1>Team</h1>
+            <p>Content for the team section goes here.</p>
+        </div>
+        <div id="contact" class="section contact">
+            <h1>Contact Us</h1>
+            <p>Content for the contact us section goes here.</p>
+        </div>
+    </div>
+</body>
+</html>
