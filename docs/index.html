@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
     <title>Single Page Website</title>
     <style>
         body {
@@ -42,7 +41,7 @@
             position: relative;
             width: 100%;
             height: 80vh; /* Shrink the photo a bit */
-            background: url('./BlossomNav_Beatles.png') no-repeat center center/cover;
+            background: url('resources/BlossomNav_Beatles.png') no-repeat center center/cover;
         }
         .hero::after {
             content: '';
@@ -101,6 +100,24 @@
         .navbar.dark a, .navbar.dark .brand {
             color: white;
         }
+        .icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .icon-item {
+            margin: 0 20px; /* More space between the icons */
+            text-align: center;
+        }
+        .icons img {
+            width: 50px; /* Increased size for better visibility */
+            height: 50px; /* Ensure all icons are of similar size */
+        }
+        .icon-label {
+            margin-top: 5px;
+            font-size: 14px;
+        }
     </style>
     <script>
         window.addEventListener('scroll', function() {
@@ -132,14 +149,39 @@
     </div>
 
     <div class="content-container">
+        <h1>Welcome to BlossomNav!</h1>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/rhi56NDJ_fc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
         <div id="overview" class="section overview">
             <h1>Overview</h1>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/rhi56NDJ_fc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p>BlossomNav is a low-cost hardware and software suite for mobile 
+                socially assistive robots (SAR) developed at the University of Southern California, Interaction Labs.
+                BlossomNav includes tools for data collection, video parsing, depth 
+                and pose estimation, and map creation using Visual SLAM techniques. It leverages affordable 
+                hardware like the Raspberry Pi Zero 2 and its camera, making advanced SAR technology 
+                accessible and user-friendly for researchers and developers.</p>
+            <p>Explore more at:</p>
+            <div class="icons">
+                <div class="icon-item">
+                    <a href="https://www.youtube.com/playlist?list=PLWwiMR9QmBLJhEZvCbaljZ9xaTZT-Sv8y" target="_blank">
+                        <img src="resources/youtube-icon.png" alt="YouTube">
+                    </a>
+                    <div class="icon-label">YouTube</div>
+                </div>
+                <div class="icon-item">
+                    <a href="https://github.com/interaction-lab/BlossomNav" target="_blank">
+                        <img src="resources/github-icon.png" alt="GitHub">
+                    </a>
+                    <div class="icon-label">GitHub</div>
+                </div>
+                <div class="icon-item">
+                    <a href="#">
+                        <img src="resources/pdf-icon.png" alt="PDF">
+                    </a>
+                    <div class="icon-label">Project Report</div>
+                </div>
             </div>
-            <p>Welcome to BlossomNav!</p>
-            <p>BlossomNav is a cutting-edge, low-cost hardware and software suite designed for mobile socially assistive robots (SAR). Developed by the Interaction Lab at the University of Southern California, BlossomNav includes tools for data collection, video parsing, depth and pose estimation, and map creation using Visual SLAM techniques. It leverages affordable hardware like the Raspberry Pi Zero 2 and its camera, making advanced SAR technology accessible and user-friendly for researchers and developers.</p>
-            <p>Explore more about BlossomNav and its capabilities on our GitHub page.</p>
         </div>
         <div id="hardware" class="section hardware">
             <h1>Hardware</h1>
