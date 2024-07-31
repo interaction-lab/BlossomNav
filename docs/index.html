@@ -20,15 +20,19 @@
             width: 100%;
             top: 0;
             z-index: 1000;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for the navbar */
+            backdrop-filter: blur(5px); /* Blur effect for anything behind the navbar */
         }
         .navbar a {
             text-decoration: none;
             padding: 10px 15px;
             font-size: 14px;
+            color: white; /* Set link color to white */
         }
         .navbar .brand {
             font-size: 18px;
             font-weight: bold;
+            color: white; /* Set brand color to white */
         }
         .navbar .nav-links {
             display: flex;
@@ -95,10 +99,10 @@
             border: 0;
         }
         .navbar.white a, .navbar.white .brand {
-            color: black;
+            color: white; /* Set link and brand color to white */
         }
         .navbar.dark a, .navbar.dark .brand {
-            color: white;
+            color: white; /* Set link and brand color to white */
         }
         .icons {
             display: flex;
