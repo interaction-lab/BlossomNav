@@ -33,13 +33,15 @@
         .navbar a {
             text-decoration: none;
             padding: 10px 15px;
-            font-size: 14px;
+            font-size: calc(8px + 0.8vw);
+            /* Use viewport width for scaling */
             color: white;
             /* Set link color to white */
         }
 
         .navbar .brand {
-            font-size: 18px;
+            font-size: calc(10px + 1vw);
+            /* Scale with viewport */
             font-weight: bold;
             color: white;
             /* Set brand color to white */
@@ -102,13 +104,15 @@
         .section h1 {
             margin-bottom: 10px;
             /* Add margin between <h1> and content */
-            font-size: 24px;
-            /* Larger font size for headings */
+            font-size: calc(16px + 1.2vw);
+            /* Use viewport units for scaling */
         }
 
         .section p {
-            font-size: 18px;
-            /* Increase font size for paragraph text */
+            font-size: calc(12px + 0.8vw);
+            /* Use viewport width for paragraph text */
+            margin-bottom: 5px;
+            /* Reduce margin below paragraph */
         }
 
         .video-container {
@@ -162,56 +166,83 @@
         }
 
         .icons img {
-            width: 50px;
-            /* Increased size for better visibility */
-            height: 50px;
+            width: calc(30px + 1vw);
+            /* Scale icons with the viewport */
+            height: calc(30px + 1vw);
             /* Ensure all icons are of similar size */
         }
 
         .icon-label {
             margin-top: 5px;
-            font-size: 14px;
+            font-size: calc(8px + 0.5vw);
+            /* Scale icon labels with the viewport */
         }
 
         .hardware-content {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            /* Align items to the top */
+            align-items: stretch;
+            /* Align items to have equal height */
             flex-wrap: wrap;
             /* Allow wrapping for smaller screens */
             gap: 10px;
             /* Adjust gap to make it smaller between the text and image */
-            margin-top: 0 px;
-            /* Move the content upwards by reducing the margin-top */
         }
 
         .hardware-text {
-            width: 45%;
+            flex: 1;
+            /* Allow text to take slightly more space */
+            min-width: 300px;
+            /* Ensure minimum size for smaller screens */
             margin: 0;
             /* Remove any margin */
-            padding-right: 5px;
+            padding-right: 10px;
             /* Optional: Add slight padding for separation */
+            font-size: calc(12px + 0.8vw);
+            /* Adjust font size dynamically */
+            line-height: 1.6;
+            /* Set a line height to control text spacing */
         }
 
         .hardware-svg {
-            width: 45%;
+            flex: 1;
+            /* Allow image to take less space */
+            min-width: 300px;
+            /* Ensure minimum size for smaller screens */
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+            /* Align to the top for visual adjustment */
+            padding-top: 15px;
+            /* Add padding to move image down */
         }
 
         .hardware-svg img {
             max-width: 100%;
             /* Ensure the image scales down within its container */
-            height: auto;
-            /* Maintain aspect ratio */
+            height: 100%;
+            /* Match the image height to the container's height */
+            object-fit: cover;
+            /* Ensure the image covers the container proportionally */
             border-radius: 10px;
             /* Optional: Add rounded corners */
+            transform: translateY(-20px);
+            /* Move the image slightly downwards */
+        }
+
+        .hardware-text ul {
+            margin-top: 5px;
+            /* Reduce margin at the top of the list */
+            margin-bottom: 5px;
+        }
+
+        .hardware-text p:last-child {
+            margin-bottom: 5px;
+            /* Reduce the margin of the last paragraph to match the top spacing */
         }
     </style>
     <script>
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const navbar = document.querySelector('.navbar');
             const hero = document.querySelector('.hero');
             const rect = hero.getBoundingClientRect();
@@ -291,6 +322,7 @@
                         <li>Urgenex 2000mAh High Performance Li-ion Battery ~$22</li>
                         <li>Atom Tech Battery ~ $15</li>
                     </ul>
+                    <p>All other parts were 3D printed. Total price ~ $90</p>
                 </div>
                 <div class="hardware-svg">
                     <img src="resources/BlossomImg.png" alt="BlossomNav Robot">
