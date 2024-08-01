@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Single Page Website</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: black; /* Entire website background set to black */
-            color: white; /* Default text color set to white */
+            background-color: black;
+            /* Entire website background set to black */
+            color: white;
+            /* Default text color set to white */
         }
+
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -20,33 +24,45 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for the navbar */
-            backdrop-filter: blur(5px); /* Blur effect for anything behind the navbar */
+            background: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent background for the navbar */
+            backdrop-filter: blur(5px);
+            /* Blur effect for anything behind the navbar */
         }
+
         .navbar a {
             text-decoration: none;
             padding: 10px 15px;
             font-size: 14px;
-            color: white; /* Set link color to white */
+            color: white;
+            /* Set link color to white */
         }
+
         .navbar .brand {
             font-size: 18px;
             font-weight: bold;
-            color: white; /* Set brand color to white */
+            color: white;
+            /* Set brand color to white */
         }
+
         .navbar .nav-links {
             display: flex;
-            padding-right: 20px; /* Add padding to move buttons to the left */
+            padding-right: 20px;
+            /* Add padding to move buttons to the left */
         }
+
         .navbar .nav-links a {
             margin-left: 15px;
         }
+
         .hero {
             position: relative;
             width: 100%;
-            height: 80vh; /* Shrink the photo a bit */
+            height: 80vh;
+            /* Shrink the photo a bit */
             background: url('resources/BlossomNav_Beatles.png') no-repeat center center/cover;
         }
+
         .hero::after {
             content: '';
             position: absolute;
@@ -56,33 +72,53 @@
             height: 100%;
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, black 100%);
         }
+
         .content-container {
-            background-color: #333; /* Dark grey background for the container */
-            padding: 20px; /* Padding for spacing */
-            border-radius: 15px; /* Rounded corners */
-            margin: 10px 20px 20px 20px; /* Margin for correct positioning */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Box shadow for better visual separation */
+            background-color: #333;
+            /* Dark grey background for the container */
+            padding: 20px;
+            /* Padding for spacing */
+            border-radius: 15px;
+            /* Rounded corners */
+            margin: 10px 20px 20px 20px;
+            /* Margin for correct positioning */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            /* Box shadow for better visual separation */
         }
+
         .section {
-            padding: 10px 20px 20px; /* Padding inside the sections */
-            margin: 0; /* No margin between sections */
+            padding: 10px 20px;
+            /* Padding inside the sections */
+            margin: 0;
+            /* No margin between sections */
         }
-        .section h1, .section p {
-            margin: 0; /* Remove default margin */
-        }
-        .section h1 {
-            padding-top: 10px; /* Add padding to compensate for removed margin */
-        }
+
+        .section h1,
         .section p {
-            margin-top: 10px; /* Add margin between <h1> and <p> */
-            font-size: 18px; /* Increase font size for paragraph text */
+            margin: 0;
+            /* Remove default margin */
         }
+
+        .section h1 {
+            margin-bottom: 10px;
+            /* Add margin between <h1> and content */
+            font-size: 24px;
+            /* Larger font size for headings */
+        }
+
+        .section p {
+            font-size: 18px;
+            /* Increase font size for paragraph text */
+        }
+
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
             height: 0;
             overflow: hidden;
-            max-width: 95%; /* 19/20 the width of the container */
+            max-width: 95%;
+            /* 19/20 the width of the container */
             background: #000;
             margin-top: 10px;
             margin-bottom: 10px;
@@ -90,6 +126,7 @@
             margin-left: auto;
             margin-right: auto;
         }
+
         .video-container iframe {
             position: absolute;
             top: 0;
@@ -98,29 +135,79 @@
             height: 100%;
             border: 0;
         }
-        .navbar.white a, .navbar.white .brand {
-            color: white; /* Set link and brand color to white */
+
+        .navbar.white a,
+        .navbar.white .brand {
+            color: white;
+            /* Set link and brand color to white */
         }
-        .navbar.dark a, .navbar.dark .brand {
-            color: white; /* Set link and brand color to white */
+
+        .navbar.dark a,
+        .navbar.dark .brand {
+            color: white;
+            /* Set link and brand color to white */
         }
+
         .icons {
             display: flex;
             justify-content: center;
             align-items: center;
             margin-top: 20px;
         }
+
         .icon-item {
-            margin: 0 20px; /* More space between the icons */
+            margin: 0 20px;
+            /* More space between the icons */
             text-align: center;
         }
+
         .icons img {
-            width: 50px; /* Increased size for better visibility */
-            height: 50px; /* Ensure all icons are of similar size */
+            width: 50px;
+            /* Increased size for better visibility */
+            height: 50px;
+            /* Ensure all icons are of similar size */
         }
+
         .icon-label {
             margin-top: 5px;
             font-size: 14px;
+        }
+
+        .hardware-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            /* Align items to the top */
+            flex-wrap: wrap;
+            /* Allow wrapping for smaller screens */
+            gap: 10px;
+            /* Adjust gap to make it smaller between the text and image */
+            margin-top: 0 px;
+            /* Move the content upwards by reducing the margin-top */
+        }
+
+        .hardware-text {
+            width: 45%;
+            margin: 0;
+            /* Remove any margin */
+            padding-right: 5px;
+            /* Optional: Add slight padding for separation */
+        }
+
+        .hardware-svg {
+            width: 45%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hardware-svg img {
+            max-width: 100%;
+            /* Ensure the image scales down within its container */
+            height: auto;
+            /* Maintain aspect ratio */
+            border-radius: 10px;
+            /* Optional: Add rounded corners */
         }
     </style>
     <script>
@@ -138,6 +225,7 @@
         });
     </script>
 </head>
+
 <body>
     <div class="hero">
         <div class="navbar white">
@@ -155,16 +243,17 @@
     <div class="content-container">
         <h1>Welcome to BlossomNav!</h1>
         <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/rhi56NDJ_fc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/rhi56NDJ_fc" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
         </div>
         <div id="overview" class="section overview">
             <h1>Overview</h1>
-            <p>BlossomNav is a low-cost hardware and software suite for mobile 
-                socially assistive robots (SAR) developed at the University of Southern California, Interaction Labs.
-                BlossomNav includes tools for data collection, video parsing, depth 
-                and pose estimation, and map creation using Visual SLAM techniques. It leverages affordable 
-                hardware like the Raspberry Pi Zero 2 and its camera, making advanced SAR technology 
-                accessible and user-friendly for researchers and developers.</p>
+            <p>BlossomNav is a low-cost hardware and software suite for mobile socially assistive robots (SAR)
+                developed at the University of Southern California, Interaction Labs. BlossomNav includes tools for
+                data collection, video parsing, depth and pose estimation, and map creation. It leverages affordable
+                hardware like the Raspberry Pi Zero 2 and its camera, making SAR technology more accessible and
+                user-friendly to the general public.</p>
             <p>Explore more at:</p>
             <div class="icons">
                 <div class="icon-item">
@@ -189,7 +278,24 @@
         </div>
         <div id="hardware" class="section hardware">
             <h1>Hardware</h1>
-            <p>Content for the hardware section goes here.</p>
+            <div class="hardware-content">
+                <div class="hardware-text">
+                    <p>The BlossomNav robot is built using the following hardware components:</p>
+                    <ul>
+                        <li>Raspberry Pi Zero 2 ~ $15</li>
+                        <li>Raspberry Pi Camera Module ~ $15</li>
+                        <li>L298N Motor Drive Controller Board Module ~ $7</li>
+                        <li>4 Toy DC Motors and 4 Wheels ~ $10</li>
+                        <li>Breadboard Jumper Wires ~ $5</li>
+                        <li>3 Hex Standoffs and Screws ~ $3</li>
+                        <li>Urgenex 2000mAh High Performance Li-ion Battery ~$22</li>
+                        <li>Atom Tech Battery ~ $15</li>
+                    </ul>
+                </div>
+                <div class="hardware-svg">
+                    <img src="resources/BlossomImg.png" alt="BlossomNav Robot">
+                </div>
+            </div>
         </div>
         <div id="software" class="section software">
             <h1>Software</h1>
@@ -205,4 +311,5 @@
         </div>
     </div>
 </body>
+
 </html>
