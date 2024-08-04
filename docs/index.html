@@ -3,7 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Single Page Website</title>
+    <title>BlossomNav</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -213,8 +213,8 @@
             justify-content: center;
             align-items: flex-start;
             /* Align to the top for visual adjustment */
-            padding-top: 15px;
-            /* Add padding to move image down */
+            padding-top: 10px;
+            /* Adjust padding to control image positioning */
         }
 
         .hardware-svg img {
@@ -226,8 +226,8 @@
             /* Ensure the image covers the container proportionally */
             border-radius: 10px;
             /* Optional: Add rounded corners */
-            transform: translateY(-20px);
-            /* Move the image slightly downwards */
+            transform: translateY(-5px);
+            /* Move the image 5 pixels upwards */
         }
 
         .hardware-text ul {
@@ -240,21 +240,41 @@
             margin-bottom: 5px;
             /* Reduce the margin of the last paragraph to match the top spacing */
         }
+
+        /* Joystick and Robot Demo styling */
+        .control-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        #joystick-container,
+        #robot-demo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #joystick-canvas {
+            background-color: #333;
+            /* Removed border to eliminate the white square */
+            width: 300px;
+            height: 300px;
+            aspect-ratio: 1;
+            /* Ensures the canvas stays circular */
+        }
+
+        #robot-demo {
+            background-color: #fff;
+            border: 1px solid black;
+            width: 300px;
+            height: 300px;
+        }
     </style>
-    <script>
-        window.addEventListener('scroll', function () {
-            const navbar = document.querySelector('.navbar');
-            const hero = document.querySelector('.hero');
-            const rect = hero.getBoundingClientRect();
-            if (rect.bottom <= 0) {
-                navbar.classList.remove('white');
-                navbar.classList.add('dark');
-            } else {
-                navbar.classList.remove('dark');
-                navbar.classList.add('white');
-            }
-        });
-    </script>
 </head>
 
 <body>
@@ -303,7 +323,7 @@
                     <a href="#">
                         <img src="resources/pdf-icon.png" alt="PDF">
                     </a>
-                    <div class="icon-label">Project Report</div>
+                    <div class="icon-label">ProjectPoster</div>
                 </div>
             </div>
         </div>
@@ -328,10 +348,30 @@
                     <img src="resources/BlossomImg.png" alt="BlossomNav Robot">
                 </div>
             </div>
+            <div>
+                <p>Click icon below for BlossomNav Instruction Manual</p>
+                <p>Watch this Video for How to Build BlossomNav</p>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/rhi56NDJ_fc" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
         </div>
         <div id="software" class="section software">
             <h1>Software</h1>
-            <p>Content for the software section goes here.</p>
+            <p>Below is the joystick control script:</p>
+            <div class="control-container">
+                <!-- Joystick Section -->
+                <div id="joystick-container">
+                    <canvas id="joystick-canvas" width="300" height="300"></canvas>
+                </div>
+
+                <!-- Robot Demo Section -->
+                <div id="robot-demo-container">
+                    <canvas id="robot-demo"></canvas>
+                </div>
+            </div>
         </div>
         <div id="team" class="section team">
             <h1>Team</h1>
@@ -342,6 +382,10 @@
             <p>Content for the contact us section goes here.</p>
         </div>
     </div>
+    <!-- Include joystick.js script -->
+    <script src="joystick.js"></script>
+    <!-- Include robotdemo.js script -->
+    <script src="robotdemo.js"></script>
 </body>
 
 </html>

@@ -149,7 +149,7 @@ class JoystickApp:
 
             path = self.teleop_dir + "/teleop-%06d.txt"%(self.count)
             saved_value = np.array([x_relative, y_relative])
-            #np.savetxt(path, saved_value)
+            np.savetxt(path, saved_value)
 
             self.count += 1
 
