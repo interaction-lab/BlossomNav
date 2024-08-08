@@ -274,6 +274,18 @@
             width: 300px;
             height: 300px;
         }
+
+        a {
+            color: #FF0000; /* Red color similar to the YouTube logo */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #CC0000; /* Slightly darker red on hover */
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -360,13 +372,18 @@
         </div>
         <div id="software" class="section software">
             <h1>Software</h1>
-            <p>Below is the joystick control script:</p>
+            <p>Below is a demo of the joystick app that we created for operating the BlossomNav robot. You can drag the inner 
+                circle to control where the robot (grey triangle) is moving inside the environment. The black rectangles are 
+                desks and tables and are obstacles that you cannot go through. If you cannot interact with the joystick, you can refresh
+                the page and that should fix it. The joystick uses skid-steering, and you can learn more about skid steering 
+                <a href="skid-steering.html" target="_blank" title="Skid Steering Explanation">here</a>.
+            </p>
             <div class="control-container">
                 <!-- Joystick Section -->
                 <div id="joystick-container">
                     <canvas id="joystick-canvas" width="300" height="300"></canvas>
                 </div>
-
+        
                 <!-- Robot Demo Section -->
                 <div id="robot-demo-container">
                     <canvas id="robot-demo"></canvas>

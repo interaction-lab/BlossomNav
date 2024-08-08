@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (isInsideSmallCircle(x, y)) {
             isDragging = true;
             canvas.addEventListener('mousemove', onMouseMove); // Ensure mousemove listener is added
+            canvas.setPointerCapture(event.pointerId); // Capture the pointer to ensure events are captured
         }
     }
 
@@ -65,12 +66,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function onMouseUp() {
+    function onMouseUp(event) {
         if (isDragging) {
             isDragging = false;
             drawJoystick(centerX, centerY); // Reset to center
             moveRobot(centerX, centerY); // Reset robot position
             canvas.removeEventListener('mousemove', onMouseMove); // Remove listener when not dragging
+            canvas.releasePointerCapture(event.pointerId); // Release pointer capture
         }
     }
 
@@ -107,4 +109,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add event listeners
     canvas.addEventListener('mousedown', onMouseDown);
     document.addEventListener('mouseup', onMouseUp); // Ensure mouseup is on document for reliability
+    window.addEventListener('resize', function() {
+        // Re-calculate center position on window resize
+        const rect = canvas.getBoundingClientRect();
+        centerX = rect.width / 2;
+        centerY = rect.height / 2;
+        drawJoystick(centerX, centerY);
+    });
 });

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skid Steering Explanation</title>
+    <!-- Include MathJax library for rendering LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            /* Match background color from index.html */
+            color: white;
+            /* Match text color from index.html */
+        }
+
+        .content-container {
+            background-color: #333;
+            /* Dark grey background for the container, matching index.html */
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            margin: 20px auto;
+            /* Center the content */
+        }
+
+        h2 {
+            color: white;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: #ddd;
+        }
+
+        .equation {
+            background-color: #444;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #555;
+        }
+
+        .highlight {
+            color: #FF0000;
+            /* YouTube red */
+            font-weight: bold;
+        }
+
+        ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            color: #ddd;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content-container">
+        <h2>Understanding Skid Steering</h2>
+        <p>
+            Skid steering is a technique used in vehicles without traditional steering mechanisms, such as
+            <span class="highlight">skid-steer loaders</span> and tracked vehicles. It allows for
+            zero-radius turns by controlling the speed and direction of the wheels or tracks on each side of the vehicle.
+        </p>
+
+        <p>
+            This maneuverability is achieved through <span class="highlight">differential speed control</span>,
+            where the wheels or tracks on one side move at different speeds or in opposite directions compared to the other side.
+        </p>
+
+        <h3>Mathematics of Skid Steering</h3>
+        <p>
+            The control of skid steering involves calculating the velocities of the left and right sides of the vehicle
+            using linear and angular velocities. The equations are as follows:
+        </p>
+
+        <div class="equation">
+            \[
+            v_L = v - \frac{\omega \times w}{2}
+            \]
+        </div>
+
+        <div class="equation">
+            \[
+            v_R = v + \frac{\omega \times w}{2}
+            \]
+        </div>
+
+        <p>
+            Where:
+            <ul>
+                <li>\(v_L\) is the velocity of the left side.</li>
+                <li>\(v_R\) is the velocity of the right side.</li>
+                <li>\(v\) is the desired linear velocity of the vehicle.</li>
+                <li>\(\omega\) is the desired angular velocity.</li>
+                <li>\(w\) is the width of the vehicle's wheelbase.</li>
+            </ul>
+        </p>
+
+        <p>
+            The turning radius \(R\) of the vehicle can be calculated using the formula:
+        </p>
+
+        <div class="equation">
+            \[
+            R = \frac{v}{\omega}
+            \]
+        </div>
+
+        <p>
+            This approach allows for precise control of the vehicle's motion, especially in environments
+            requiring tight maneuverability. By adjusting the velocities, skid-steer vehicles can perform
+            tasks efficiently without the need for a traditional steering mechanism.
+        </p>
+    </div>
+</body>
+
+</html>

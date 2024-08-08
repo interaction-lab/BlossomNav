@@ -47,25 +47,15 @@ document.addEventListener('DOMContentLoaded', function () {
         demoCtx.translate(x, y);
         demoCtx.rotate(angle);
 
-        // Draw robot as a triangle with a red tip
+        // Draw robot as an equilateral triangle
+        const height = robotSize * Math.sqrt(3) / 2; // Height for equilateral triangle
         demoCtx.beginPath();
-        demoCtx.moveTo(0, -robotSize); // Tip of the triangle
-        demoCtx.lineTo(robotSize / 2, robotSize);
-        demoCtx.lineTo(-robotSize / 2, robotSize);
+        demoCtx.moveTo(0, -height); // Top vertex
+        demoCtx.lineTo(robotSize / 2, height / 2); // Bottom right
+        demoCtx.lineTo(-robotSize / 2, height / 2); // Bottom left
         demoCtx.closePath();
 
-        // Fill the triangle with a grey body
         demoCtx.fillStyle = 'grey';
-        demoCtx.fill();
-
-        // Red tip
-        demoCtx.beginPath();
-        demoCtx.moveTo(0, -robotSize);
-        demoCtx.lineTo(-robotSize / 6, -robotSize / 3);
-        demoCtx.lineTo(robotSize / 6, -robotSize / 3);
-        demoCtx.closePath();
-
-        demoCtx.fillStyle = 'red';
         demoCtx.fill();
 
         demoCtx.restore();
@@ -75,14 +65,42 @@ document.addEventListener('DOMContentLoaded', function () {
         const speed = 2; // Speed of movement
         const turnSpeed = 0.05; // Speed of rotation
 
-        // Update robot position and angle based on joystick input
+        // Calculate new position
+        let newX = robotX + Math.sin(robotAngle) * dy * speed;
+        let newY = robotY - Math.cos(robotAngle) * dy * speed;
+
+        // Check for collisions with obstacles
+        if (!checkCollision(newX, newY)) {
+            robotX = newX;
+            robotY = newY;
+        }
+
+        // Update angle
         robotAngle += dx * turnSpeed; // Turn left/right
-        robotX += Math.sin(robotAngle) * dy * speed; // Move forward/backward based on y direction
-        robotY -= Math.cos(robotAngle) * dy * speed;
 
         // Ensure the robot stays within bounds
         robotX = Math.max(robotSize, Math.min(robotX, demoCanvas.width - robotSize));
         robotY = Math.max(robotSize, Math.min(robotY, demoCanvas.height - robotSize));
+    }
+
+    function checkCollision(x, y) {
+        const obstacles = [
+            { x: 50, y: 75, width: 50, height: 25 },
+            { x: 200, y: 150, width: 50, height: 25 },
+            { x: 100, y: 200, width: 10, height: 50 },
+            { x: 100, y: 240, width: 30, height: 10 },
+            { x: 250, y: 50, width: 10, height: 50 },
+            { x: 230, y: 50, width: 30, height: 10 }
+        ];
+
+        return obstacles.some(obstacle => {
+            return (
+                x + robotSize / 2 > obstacle.x &&
+                x - robotSize / 2 < obstacle.x + obstacle.width &&
+                y + robotSize / 2 > obstacle.y &&
+                y - robotSize / 2 < obstacle.y + obstacle.height
+            );
+        });
     }
 
     // Listen for joystick movements
