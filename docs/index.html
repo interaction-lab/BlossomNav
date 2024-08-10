@@ -10,9 +10,7 @@
             margin: 0;
             padding: 0;
             background-color: black;
-            /* Entire website background set to black */
             color: white;
-            /* Default text color set to white */
         }
 
         .navbar {
@@ -25,32 +23,25 @@
             top: 0;
             z-index: 1000;
             background: rgba(0, 0, 0, 0.5);
-            /* Semi-transparent background for the navbar */
             backdrop-filter: blur(5px);
-            /* Blur effect for anything behind the navbar */
         }
 
         .navbar a {
             text-decoration: none;
             padding: 10px 15px;
             font-size: calc(8px + 0.8vw);
-            /* Use viewport width for scaling */
             color: white;
-            /* Set link color to white */
         }
 
         .navbar .brand {
             font-size: calc(10px + 1vw);
-            /* Scale with viewport */
             font-weight: bold;
             color: white;
-            /* Set brand color to white */
         }
 
         .navbar .nav-links {
             display: flex;
             padding-right: 20px;
-            /* Add padding to move buttons to the left */
         }
 
         .navbar .nav-links a {
@@ -61,7 +52,6 @@
             position: relative;
             width: 100%;
             height: 80vh;
-            /* Shrink the photo a bit */
             background: url('resources/BlossomNav_Beatles.png') no-repeat center center/cover;
         }
 
@@ -77,52 +67,38 @@
 
         .content-container {
             background-color: #333;
-            /* Dark grey background for the container */
             padding: 20px;
-            /* Padding for spacing */
             border-radius: 15px;
-            /* Rounded corners */
             margin: 10px 20px 20px 20px;
-            /* Margin for correct positioning */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            /* Box shadow for better visual separation */
         }
 
         .section {
             padding: 10px 20px;
-            /* Padding inside the sections */
             margin: 0;
-            /* No margin between sections */
         }
 
         .section h1,
         .section p {
             margin: 0;
-            /* Remove default margin */
         }
 
         .section h1 {
             margin-bottom: 10px;
-            /* Add margin between <h1> and content */
             font-size: calc(16px + 1.2vw);
-            /* Use viewport units for scaling */
         }
 
         .section p {
             font-size: calc(12px + 0.8vw);
-            /* Use viewport width for paragraph text */
             margin-bottom: 5px;
-            /* Reduce margin below paragraph */
         }
 
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
-            /* 16:9 aspect ratio */
             height: 0;
             overflow: hidden;
             max-width: 95%;
-            /* 19/20 the width of the container */
             background: #000;
             margin-top: 10px;
             margin-bottom: 10px;
@@ -143,13 +119,11 @@
         .navbar.white a,
         .navbar.white .brand {
             color: white;
-            /* Set link and brand color to white */
         }
 
         .navbar.dark a,
         .navbar.dark .brand {
             color: white;
-            /* Set link and brand color to white */
         }
 
         .icons {
@@ -161,87 +135,62 @@
 
         .icon-item {
             margin: 0 20px;
-            /* More space between the icons */
             text-align: center;
         }
 
         .icons img {
             width: calc(30px + 1vw);
-            /* Scale icons with the viewport */
             height: calc(30px + 1vw);
-            /* Ensure all icons are of similar size */
         }
 
         .icon-label {
             margin-top: 5px;
             font-size: calc(8px + 0.5vw);
-            /* Scale icon labels with the viewport */
         }
 
         .hardware-content {
             display: flex;
             justify-content: space-between;
             align-items: stretch;
-            /* Align items to have equal height */
             flex-wrap: wrap;
-            /* Allow wrapping for smaller screens */
             gap: 10px;
-            /* Adjust gap to make it smaller between the text and image */
         }
 
         .hardware-text {
             flex: 1;
-            /* Allow text to take slightly more space */
             min-width: 300px;
-            /* Ensure minimum size for smaller screens */
             margin: 0;
-            /* Remove any margin */
             padding-right: 10px;
-            /* Optional: Add slight padding for separation */
             font-size: calc(12px + 0.8vw);
-            /* Adjust font size dynamically */
             line-height: 1.6;
-            /* Set a line height to control text spacing */
         }
 
         .hardware-svg {
             flex: 1;
-            /* Allow image to take less space */
             min-width: 300px;
-            /* Ensure minimum size for smaller screens */
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            /* Align to the top for visual adjustment */
             padding-top: 10px;
-            /* Adjust padding to control image positioning */
         }
 
         .hardware-svg img {
             max-width: 100%;
-            /* Ensure the image scales down within its container */
             height: 100%;
-            /* Match the image height to the container's height */
             object-fit: cover;
-            /* Ensure the image covers the container proportionally */
             border-radius: 10px;
-            /* Optional: Add rounded corners */
             transform: translateY(-5px);
-            /* Move the image 5 pixels upwards */
         }
 
         .hardware-text ul {
             margin-top: 5px;
-            /* Reduce margin at the top of the list */
             margin-bottom: 5px;
         }
 
         .hardware-text p:last-child {
             margin-bottom: 5px;
-            /* Reduce the margin of the last paragraph to match the top spacing */
         }
 
-        /* Joystick and Robot Demo styling */
         .control-container {
             display: flex;
             justify-content: center;
@@ -261,11 +210,9 @@
 
         #joystick-canvas {
             background-color: #333;
-            /* Removed border to eliminate the white square */
             width: 300px;
             height: 300px;
             aspect-ratio: 1;
-            /* Ensures the canvas stays circular */
         }
 
         #robot-demo {
@@ -276,15 +223,98 @@
         }
 
         a {
-            color: #FF0000; /* Red color similar to the YouTube logo */
+            color: #FF0000;
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s;
         }
 
         a:hover {
-            color: #CC0000; /* Slightly darker red on hover */
+            color: #CC0000;
             text-decoration: underline;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background-color: #333;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item {
+            flex: 1;
+            margin: 10px;
+            background-color: #444;
+            color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            max-width: calc(100% / 3 * 0.75);
+        }
+
+        .carousel-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .carousel-item img {
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-item .name {
+            padding: 10px;
+            font-size: calc(12px + 0.8vw);
+            text-align: center;
+            background-color: #555;
+        }
+
+        .carousel-item .icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .carousel-item .icons img {
+            width: 24px;
+            height: 24px;
+            margin: 0 10px;
+        }
+
+        .carousel-item .icons a {
+            border-bottom: none;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-control {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-control:hover {
+            background-color: rgba(0, 0, 0, 0.8);
         }
     </style>
 </head>
@@ -306,7 +336,7 @@
     <div class="content-container">
         <h1>Welcome to BlossomNav!</h1>
         <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/rhi56NDJ_fc" frameborder="0"
+            <iframe src="https://www.youtube.com/embed/Vb50xC7WYMc" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen></iframe>
         </div>
@@ -372,37 +402,103 @@
         </div>
         <div id="software" class="section software">
             <h1>Software</h1>
-            <p>Below is a demo of the joystick app that we created for operating the BlossomNav robot. You can drag the inner 
-                circle to control where the robot (grey triangle) is moving inside the environment. The black rectangles are 
-                desks and tables and are obstacles that you cannot go through. If you cannot interact with the joystick, you can refresh
-                the page and that should fix it. The joystick uses skid-steering, and you can learn more about skid steering 
-                <a href="skid-steering.html" target="_blank" title="Skid Steering Explanation">here</a>.
-            </p>
-            <div class="control-container">
-                <!-- Joystick Section -->
-                <div id="joystick-container">
-                    <canvas id="joystick-canvas" width="300" height="300"></canvas>
-                </div>
-        
-                <!-- Robot Demo Section -->
-                <div id="robot-demo-container">
-                    <canvas id="robot-demo"></canvas>
+            <div>
+                <p>Below is a demo of the joystick app that we created for operating the BlossomNav robot. You can drag the inner 
+                    circle to control where the robot (grey triangle) is moving inside the environment. The black rectangles are 
+                    desks and tables and are obstacles that you cannot go through. If you cannot interact with the joystick, you can refresh
+                    the page and that should fix it. The joystick uses skid-steering, and you can learn more about skid steering 
+                    <a href="skid-steering.html" target="_blank" title="Skid Steering Explanation">here</a>.
+                </p>
+                <div class="control-container">
+                    <div id="joystick-container">
+                        <canvas id="joystick-canvas" width="300" height="300"></canvas>
+                    </div>
+                    <div id="robot-demo-container">
+                        <canvas id="robot-demo"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
         <div id="team" class="section team">
             <h1>Team</h1>
-            <p>Content for the team section goes here.</p>
+            <div class="carousel-container">
+                <div class="carousel" id="team-carousel">
+                    <div class="carousel-item">
+                        <img src="resources/anthony.jpg" alt="Anthony Song">
+                        <div class="name">Anthony Song</div>
+                        <div class="icons">
+                            <a href="https://github.com/AnthonyBSong"><img src="resources/github-icon.png" alt="GitHub"></a>
+                            <a href="https://www.linkedin.com/in/anthonybsong7851"><img src="resources/linkedin.png" alt="LinkedIn"></a>
+                            <a href="https://www.anthony.com"><img src="resources/website.png" alt="Website"></a>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="resources/nathan.jpg" alt="Nathan Dennler">
+                        <div class="name">Nathan Dennler</div>
+                        <div class="icons">
+                            <a href="https://github.com/ndennler"><img src="resources/github-icon.png" alt="GitHub"></a>
+                            <a href="https://www.linkedin.com/in/nathan"><img src="resources/linkedin.png" alt="LinkedIn"></a>
+                            <a href="https://ndennler.github.io/"><img src="resources/website.png" alt="Website"></a>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="resources/maja.jpg" alt="Maja Mataric">
+                        <div class="name">Maja Mataric</div>
+                        <div class="icons">
+                            <a href="https://www.linkedin.com/in/maja-mataric-5b670014"><img src="resources/linkedin.png" alt="LinkedIn"></a>
+                            <a href="https://viterbi.usc.edu/directory/faculty/Mataric/Maja"><img src="resources/website.png" alt="Website"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-control" id="prev">‹</button>
+                    <button class="carousel-control" id="next">›</button>
+                </div>
+            </div>
         </div>
         <div id="contact" class="section contact">
             <h1>Contact Us</h1>
             <p>Content for the contact us section goes here.</p>
         </div>
     </div>
-    <!-- Include joystick.js script -->
     <script src="joystick.js"></script>
-    <!-- Include robotdemo.js script -->
     <script src="robotdemo.js"></script>
+    <script>
+        const carousel = document.getElementById('team-carousel');
+        const nextButton = document.getElementById('next');
+        const prevButton = document.getElementById('prev');
+        let scrollAmount = 0;
+
+        nextButton.addEventListener('click', () => {
+            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+            if (scrollAmount < maxScroll) {
+                scrollAmount += carousel.clientWidth;
+                if (scrollAmount > maxScroll) scrollAmount = maxScroll;
+                carousel.style.transform = `translateX(-${scrollAmount}px)`;
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (scrollAmount > 0) {
+                scrollAmount -= carousel.clientWidth;
+                if (scrollAmount < 0) scrollAmount = 0;
+                carousel.style.transform = `translateX(-${scrollAmount}px)`;
+            }
+        });
+
+        // Ensure all carousel items are equal width and scale with viewport
+        const setCarouselItemWidth = () => {
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const viewportWidth = window.innerWidth;
+            const itemWidth = viewportWidth * 0.25; // 0.25 scale of viewport width
+            carouselItems.forEach(item => {
+                item.style.flex = `0 0 ${itemWidth}px`;
+            });
+        };
+
+        window.addEventListener('resize', setCarouselItemWidth);
+        window.addEventListener('load', setCarouselItemWidth);
+    </script>
 </body>
 
 </html>
