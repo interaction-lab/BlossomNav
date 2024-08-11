@@ -94,6 +94,19 @@
         .section h1 {
             margin-bottom: 10px;
             font-size: calc(16px + 1.2vw);
+            font-weight: bold; /* Ensure h1 is bold */
+        }
+
+        .section h2 {
+            margin-bottom: 8px;
+            font-size: calc(14px + 1vw); /* Make h2 scalable */
+            font-weight: bold; /* Make h2 bold */
+        }
+
+        .section h3 {
+            margin-bottom: 6px;
+            font-size: calc(12px + 0.8vw); /* Make h3 scalable */
+            font-weight: bold; /* Make h3 bold */
         }
 
         .section p {
@@ -187,7 +200,7 @@
             height: 100%;
             object-fit: cover;
             border-radius: 10px;
-            transform: translateY(-42px);
+            transform: translateY(-30px);
         }
 
         .hardware-text ul {
@@ -289,7 +302,7 @@
         }
 
         .carousel-item .name {
-            padding: 10px;
+            padding: 5px; /* Reduce padding to make the gap smaller */
             font-size: calc(12px + 0.8vw);
             text-align: center;
             background-color: #555;
@@ -299,17 +312,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px;
+            padding: 5px; /* Reduce padding here as well */
         }
 
         .carousel-item .icons img {
             width: 24px;
             height: 24px;
-            margin: 0 10px;
-        }
-
-        .carousel-item .icons a {
-            border-bottom: none;
+            margin: 0 5px; /* Reduce the margin between the icons */
         }
 
         .carousel-controls {
@@ -335,6 +344,37 @@
         .carousel-control:hover {
             background-color: rgba(0, 0, 0, 0.8);
         }
+        
+        .download-button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #FF0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: calc(12px + 0.5vw);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+        .download-button:hover {
+            background-color: #CC0000;
+        }
+
+        .download-button img {
+            margin-right: 10px;
+            width: 24px; /* Adjust size as needed */
+            height: 24px; /* Adjust size as needed */
+        }
+    </style>
     </style>
 </head>
 
@@ -498,7 +538,24 @@
                 <h1>Software</h1>
                 <div>
                     <h2>Operating System</h2>
-                    <p></p>
+                    <p>
+                        BlossomNav uses a adapted version of MotionEyeOS, which is a Linux-based operating system designed 
+                        specifically for network video camera management. It is able to turn
+                        single-board computers like the Raspberry Pi into a dedicated video surveillance system. 
+                        MotionEyeOS provides a web-based user interface for easy configuration and monitoring, supporting 
+                        features like motion detection, video recording, notifications, and remote access. 
+                        It's often used in DIY security setups due to its lightweight nature and extensive camera support.
+                    </p>
+                    <span style="display: block; height: 10px;"></span>
+                    <p>Below, you can download our modified MotionEyeOS for your Pi Zero 2 W. 
+                    You can also read more about MotionEyeOS on their <a href="https://github.com/motioneye-project/motioneyeos" style="color: red;">github</a>.</p>
+                    <!-- New Download Button -->
+                    <div class="download-button-container">
+                        <a href="path/to/BlossomNav-image.img" class="download-button" download>
+                            <img src="resources/download.png" alt="Download">
+                            Download BlossomNav Image
+                        </a>
+                    </div>
                 </div>
                 <div>
                     <h2>Joystick</h2>
