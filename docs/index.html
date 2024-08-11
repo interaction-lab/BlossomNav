@@ -157,7 +157,7 @@
         }
 
         .hardware-text {
-            flex: 1;
+            flex: 2; /* 2/3 of the space */
             min-width: 300px;
             margin: 0;
             padding-right: 10px;
@@ -166,8 +166,8 @@
         }
 
         .hardware-svg {
-            flex: 1;
-            min-width: 300px;
+            flex: 1; /* 1/3 of the space */
+            min-width: 200px;
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -179,7 +179,7 @@
             height: 100%;
             object-fit: cover;
             border-radius: 10px;
-            transform: translateY(-5px);
+            transform: translateY(-10px);
         }
 
         .hardware-text ul {
@@ -362,34 +362,108 @@
                     <div class="icon-label">GitHub</div>
                 </div>
                 <div class="icon-item">
-                    <a href="#">
+                    <a href="resources/BlossomNav_Poster.pdf" target="_blank">
                         <img src="resources/pdf-icon.png" alt="PDF">
                     </a>
                     <div class="icon-label">ProjectPoster</div>
-                </div>
+                </div>        
             </div>
         </div>
         <div id="hardware" class="section hardware">
             <h1>Hardware</h1>
             <div class="hardware-content">
                 <div class="hardware-text">
-                    <p>The BlossomNav robot is built using the following hardware components:</p>
-                    <ul>
-                        <li>Raspberry Pi Zero 2 ~ $15</li>
-                        <li>Raspberry Pi Camera Module ~ $15</li>
-                        <li>L298N Motor Drive Controller Board Module ~ $7</li>
-                        <li>4 Toy DC Motors and 4 Wheels ~ $10</li>
-                        <li>Breadboard Jumper Wires ~ $5</li>
-                        <li>3 Hex Standoffs and Screws ~ $3</li>
-                        <li>Urgenex 2000mAh High Performance Li-ion Battery ~$22</li>
-                        <li>Atom Tech Battery ~ $15</li>
-                    </ul>
-                    <p>All other parts were 3D printed. Total price ~ $90</p>
+                    <hr class="breakthrough-line">
+                    <p>
+                        <strong>Current State:</strong> Current SAR hardware has accessibility issues due to high costs. These robots often need expensive, sophisticated components, limiting their use to well-funded institutions and large research projects.
+                    </p>
+                    <hr class="breakthrough-line">
+                    <p>
+                        <strong>BlossomNav:</strong> BlossomNav offers an affordable, customizable alternative by using cost-effective, off-the-shelf components. This makes SAR technology accessible for education, research, and hobbyists, broadening its potential impact and enabling more widespread adoption.
+                    </p>
+                    <hr class="breakthrough-line">    
                 </div>
                 <div class="hardware-svg">
                     <img src="resources/BlossomImg.png" alt="BlossomNav Robot">
                 </div>
             </div>
+            <div id="hardware" class="section hardware">
+                <h2>Materials List</h2>
+                <div class="hardware-content">
+                    <table style="width:100%; border-collapse: collapse; background-color: #444; color: white; border-radius: 10px; overflow: hidden;">
+                        <thead>
+                            <tr>
+                                <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #555;">Item</th>
+                                <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #555;">Link</th>
+                                <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #555;">Price</th>
+                                <th style="border: 1px solid #ddd; padding: 12px; text-align: left; background-color: #555;">Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Raspberry Pi Zero 2</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/Raspberry-Quad-core-Bluetooth-onboard-Antenna/dp/B0CCRP85TR" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">$25</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">2x20-pin Strip Dual Male Header</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/Break-Away-2x20-pin-Strip-Header-Raspberry/dp/B0756KM7CY" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">$4</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Camera for Raspberry Pi</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/Camera-Arducam-Raspberry-Raspbian-MotionEye/dp/B01LY05LOE" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">$9</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">L298N Motor Drive</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/WWZMDiB-L298N-H-Bridge-Controller-Raspberry/dp/B0CR6BX5QL" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">$6</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Toy DC Motor and Wheel (Set of 4)</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/AEDIKO-Motor-Gearbox-Shaft-200RPM/dp/B099Z85573" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">$10</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Breadboard Jumper Wire Set</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/EDGELEC-Breadboard-Optional-Assorted-Multicolored/dp/B07GD2BWPY" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">$7</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">M3 Hex Standoffs</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.digikey.com/en/products/detail/keystone-electronics/24438/1532170" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">$1</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">3</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">M3 Screws</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.digikey.com/en/products/detail/apm-hexseal/RM3X10MM-2701/3712296" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">$1</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">3</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Urgenex 2000mAh High Performance Li-ion Battery</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/URGENEX-Battery-Capacity-Batteries-Chargers/dp/B08XZP4CDJ" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">$22</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">Atom Tech Battery</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/Attom-Tech-Portable-External-Emergency/dp/B07JZCZSH9" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">$17</td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
             <div>
                 <p>Click icon below for BlossomNav Instruction Manual</p>
                 <p>Watch this Video for How to Build BlossomNav</p>
