@@ -69,8 +69,16 @@
             background-color: #333;
             padding: 20px;
             border-radius: 15px;
-            margin: 10px 20px 20px 20px;
+            margin: 10px auto 20px auto;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 70vw;
+        }
+
+        @media (max-width: 70vw) {
+            .content-container {
+                width: 100%;
+            }
         }
 
         .section {
@@ -157,7 +165,7 @@
         }
 
         .hardware-text {
-            flex: 2; /* 2/3 of the space */
+            flex: 2;
             min-width: 300px;
             margin: 0;
             padding-right: 10px;
@@ -166,7 +174,7 @@
         }
 
         .hardware-svg {
-            flex: 1; /* 1/3 of the space */
+            flex: 1;
             min-width: 200px;
             display: flex;
             justify-content: center;
@@ -179,7 +187,7 @@
             height: 100%;
             object-fit: cover;
             border-radius: 10px;
-            transform: translateY(-10px);
+            transform: translateY(-42px);
         }
 
         .hardware-text ul {
@@ -191,35 +199,46 @@
             margin-bottom: 5px;
         }
 
+        .breakthrough-line {
+            border: none;
+            height: 2px;
+            background-color: #ddd;
+            margin: 10px 0;
+        }
+
         .control-container {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
             gap: 20px;
             margin-top: 20px;
+            width: 100%;
         }
 
         #joystick-container,
         #robot-demo-container {
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            width: 100%;
+        }
+
+        #joystick-canvas,
+        #robot-demo {
+            background-color: #333;
+            width: 100%;
+            height: auto;
         }
 
         #joystick-canvas {
-            background-color: #333;
-            width: 300px;
-            height: 300px;
-            aspect-ratio: 1;
+            border: 1px solid white;
         }
 
         #robot-demo {
             background-color: #fff;
             border: 1px solid black;
-            width: 300px;
-            height: 300px;
         }
 
         a {
@@ -366,7 +385,7 @@
                         <img src="resources/pdf-icon.png" alt="PDF">
                     </a>
                     <div class="icon-label">ProjectPoster</div>
-                </div>        
+                </div>
             </div>
         </div>
         <div id="hardware" class="section hardware">
@@ -402,137 +421,139 @@
                         <tbody>
                             <tr>
                                 <td style="border: 1px solid #ddd; padding: 8px;">Raspberry Pi Zero 2</td>
-                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/Raspberry-Quad-core-Bluetooth-onboard-Antenna/dp/B0CCRP85TR" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/Raspberry-Quad-core-Bluetooth-onboard-Antenna/dp/B0CCRP85TR" target="_blank" style="color: #FF0000;">Buy Here</a></td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">$25</td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">1</td>
                             </tr>
                             <tr>
                                 <td style="border: 1px solid #ddd; padding: 8px;">2x20-pin Strip Dual Male Header</td>
-                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/Break-Away-2x20-pin-Strip-Header-Raspberry/dp/B0756KM7CY" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/Break-Away-2x20-pin-Strip-Header-Raspberry/dp/B0756KM7CY" target="_blank" style="color: #FF0000;">Buy Here</a></td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">$4</td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">1</td>
                             </tr>
                             <tr>
                                 <td style="border: 1px solid #ddd; padding: 8px;">Camera for Raspberry Pi</td>
-                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/Camera-Arducam-Raspberry-Raspbian-MotionEye/dp/B01LY05LOE" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/Camera-Arducam-Raspberry-Raspbian-MotionEye/dp/B01LY05LOE" target="_blank" style="color: #FF0000;">Buy Here</a></td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">$9</td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">1</td>
                             </tr>
                             <tr>
                                 <td style="border: 1px solid #ddd; padding: 8px;">L298N Motor Drive</td>
-                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/WWZMDiB-L298N-H-Bridge-Controller-Raspberry/dp/B0CR6BX5QL" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/WWZMDiB-L298N-H-Bridge-Controller-Raspberry/dp/B0CR6BX5QL" target="_blank" style="color: #FF0000;">Buy Here</a></td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">$6</td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">1</td>
                             </tr>
                             <tr>
                                 <td style="border: 1px solid #ddd; padding: 8px;">Toy DC Motor and Wheel (Set of 4)</td>
-                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/AEDIKO-Motor-Gearbox-Shaft-200RPM/dp/B099Z85573" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/AEDIKO-Motor-Gearbox-Shaft-200RPM/dp/B099Z85573" target="_blank" style="color: #FF0000;">Buy Here</a></td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">$10</td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">1</td>
                             </tr>
                             <tr>
                                 <td style="border: 1px solid #ddd; padding: 8px;">Breadboard Jumper Wire Set</td>
-                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/EDGELEC-Breadboard-Optional-Assorted-Multicolored/dp/B07GD2BWPY" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/EDGELEC-Breadboard-Optional-Assorted-Multicolored/dp/B07GD2BWPY" target="_blank" style="color: #FF0000;">Buy Here</a></td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">$7</td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">1</td>
                             </tr>
                             <tr>
                                 <td style="border: 1px solid #ddd; padding: 8px;">M3 Hex Standoffs</td>
-                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.digikey.com/en/products/detail/keystone-electronics/24438/1532170" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.digikey.com/en/products/detail/keystone-electronics/24438/1532170" target="_blank" style="color: #FF0000;">Buy Here</a></td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">$1</td>
                                 <td style="border: 1px solid #ddd; padding: 8px;">3</td>
                             </tr>
                             <tr>
                                 <td style="border: 1px solid #ddd; padding: 8px;">M3 Screws</td>
-                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.digikey.com/en/products/detail/apm-hexseal/RM3X10MM-2701/3712296" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
-                                <td style="border: 1px solid #ddd; padding: 8px;">$1</td>
-                                <td style="border: 1px solid #ddd; padding: 8px;">3</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #ddd; padding: 8px;">Urgenex 2000mAh High Performance Li-ion Battery</td>
-                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/URGENEX-Battery-Capacity-Batteries-Chargers/dp/B08XZP4CDJ" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
-                                <td style="border: 1px solid #ddd; padding: 8px;">$22</td>
-                                <td style="border: 1px solid #ddd; padding: 8px;">1</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #ddd; padding: 8px;">Atom Tech Battery</td>
-                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/Attom-Tech-Portable-External-Emergency/dp/B07JZCZSH9" target="_blank" style="color: #1E90FF;">Buy Here</a></td>
-                                <td style="border: 1px solid #ddd; padding: 8px;">$17</td>
-                                <td style="border: 1px solid #ddd; padding: 8px;">1</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                </div>
-            <div>
-                <p>Click icon below for BlossomNav Instruction Manual</p>
-                <p>Watch this Video for How to Build BlossomNav</p>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/rhi56NDJ_fc" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-        <div id="software" class="section software">
-            <h1>Software</h1>
-            <div>
-                <p>Below is a demo of the joystick app that we created for operating the BlossomNav robot. You can drag the inner 
-                    circle to control where the robot (grey triangle) is moving inside the environment. The black rectangles are 
-                    desks and tables and are obstacles that you cannot go through. If you cannot interact with the joystick, you can refresh
-                    the page and that should fix it. The joystick uses skid-steering, and you can learn more about skid steering 
-                    <a href="skid-steering.html" target="_blank" title="Skid Steering Explanation">here</a>.
-                </p>
-                <div class="control-container">
-                    <div id="joystick-container">
-                        <canvas id="joystick-canvas" width="300" height="300"></canvas>
+                                <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.digikey.com/en/products/detail/apm-hexseal/RM3X10MM-2701/3712296" target="_blank" style="color: #FF0000;">
+                                    Buy Here</a></td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">$1</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">3</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">Urgenex 2000mAh High Performance Li-ion Battery</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/URGENEX-Battery-Capacity-Batteries-Chargers/dp/B08XZP4CDJ" target="_blank" style="color: #FF0000;">Buy Here</a></td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">$22</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">Atom Tech Battery</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;"><a href="https://www.amazon.com/Attom-Tech-Portable-External-Emergency/dp/B07JZCZSH9" target="_blank" style="color: #FF0000;">Buy Here</a></td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">$17</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div id="robot-demo-container">
-                        <canvas id="robot-demo"></canvas>
+                </div>
+                <div>
+                    <p>Click icon below for BlossomNav Instruction Manual</p>
+                    <p>Watch this Video for How to Build BlossomNav</p>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/rhi56NDJ_fc" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="team" class="section team">
-            <h1>Team</h1>
-            <div class="carousel-container">
-                <div class="carousel" id="team-carousel">
-                    <div class="carousel-item">
-                        <img src="resources/anthony.jpg" alt="Anthony Song">
-                        <div class="name">Anthony Song</div>
-                        <div class="icons">
-                            <a href="https://github.com/AnthonyBSong"><img src="resources/github-icon.png" alt="GitHub"></a>
-                            <a href="https://www.linkedin.com/in/anthonybsong7851"><img src="resources/linkedin.png" alt="LinkedIn"></a>
-                            <a href="https://www.anthony.com"><img src="resources/website.png" alt="Website"></a>
+            <div id="software" class="section software">
+                <h1>Software</h1>
+                <div>
+                    <p>Below is a demo of the joystick app that we created for operating the BlossomNav robot. You can drag the inner 
+                        circle to control where the robot (grey triangle) is moving inside the environment. The black rectangles are 
+                        desks and tables and are obstacles that you cannot go through. If you cannot interact with the joystick, you can refresh
+                        the page and that should fix it. The joystick uses skid-steering, and you can learn more about skid steering 
+                        <a href="skid-steering.html" target="_blank" title="Skid Steering Explanation">here</a>.
+                    </p>
+                    <div class="control-container">
+                        <div id="joystick-container">
+                            <canvas id="joystick-canvas"></canvas>
+                        </div>
+                        <div id="robot-demo-container">
+                            <canvas id="robot-demo"></canvas>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <img src="resources/nathan.jpg" alt="Nathan Dennler">
-                        <div class="name">Nathan Dennler</div>
-                        <div class="icons">
-                            <a href="https://github.com/ndennler"><img src="resources/github-icon.png" alt="GitHub"></a>
-                            <a href="https://www.linkedin.com/in/nathan"><img src="resources/linkedin.png" alt="LinkedIn"></a>
-                            <a href="https://ndennler.github.io/"><img src="resources/website.png" alt="Website"></a>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="resources/maja.jpg" alt="Maja Mataric">
-                        <div class="name">Maja Mataric</div>
-                        <div class="icons">
-                            <a href="https://www.linkedin.com/in/maja-mataric-5b670014"><img src="resources/linkedin.png" alt="LinkedIn"></a>
-                            <a href="https://viterbi.usc.edu/directory/faculty/Mataric/Maja"><img src="resources/website.png" alt="Website"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-controls">
-                    <button class="carousel-control" id="prev">‹</button>
-                    <button class="carousel-control" id="next">›</button>
                 </div>
             </div>
-        </div>
-        <div id="contact" class="section contact">
-            <h1>Contact Us</h1>
-            <p>Content for the contact us section goes here.</p>
+            <div id="team" class="section team">
+                <h1>Team</h1>
+                <div class="carousel-container">
+                    <div class="carousel" id="team-carousel">
+                        <div class="carousel-item">
+                            <img src="resources/anthony.jpg" alt="Anthony Song">
+                            <div class="name">Anthony Song</div>
+                            <div class="icons">
+                                <a href="https://github.com/AnthonyBSong"><img src="resources/github-icon.png" alt="GitHub"></a>
+                                <a href="https://www.linkedin.com/in/anthonybsong7851"><img src="resources/linkedin.png" alt="LinkedIn"></a>
+                                <a href="https://www.anthony.com"><img src="resources/website.png" alt="Website"></a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="resources/nathan.jpg" alt="Nathan Dennler">
+                            <div class="name">Nathan Dennler</div>
+                            <div class="icons">
+                                <a href="https://github.com/ndennler"><img src="resources/github-icon.png" alt="GitHub"></a>
+                                <a href="https://www.linkedin.com/in/nathan"><img src="resources/linkedin.png" alt="LinkedIn"></a>
+                                <a href="https://ndennler.github.io/"><img src="resources/website.png" alt="Website"></a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="resources/maja.jpg" alt="Maja Mataric">
+                            <div class="name">Maja Mataric</div>
+                            <div class="icons">
+                                <a href="https://www.linkedin.com/in/maja-mataric-5b670014"><img src="resources/linkedin.png" alt="LinkedIn"></a>
+                                <a href="https://viterbi.usc.edu/directory/faculty/Mataric/Maja"><img src="resources/website.png" alt="Website"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-controls">
+                        <button class="carousel-control" id="prev">‹</button>
+                        <button class="carousel-control" id="next">›</button>
+                    </div>
+                </div>
+            </div>
+            <div id="contact" class="section contact">
+                <h1>Contact Us</h1>
+                <p>Content for the contact us section goes here.</p>
+            </div>
         </div>
     </div>
     <script src="joystick.js"></script>
@@ -560,18 +581,32 @@
             }
         });
 
-        // Ensure all carousel items are equal width and scale with viewport
-        const setCarouselItemWidth = () => {
-            const carouselItems = document.querySelectorAll('.carousel-item');
-            const viewportWidth = window.innerWidth;
-            const itemWidth = viewportWidth * 0.25; // 0.25 scale of viewport width
-            carouselItems.forEach(item => {
-                item.style.flex = `0 0 ${itemWidth}px`;
-            });
+        const setCanvasSize = () => {
+            const joystickCanvas = document.getElementById('joystick-canvas');
+            const robotDemoCanvas = document.getElementById('robot-demo');
+            const controlContainer = document.querySelector('.control-container');
+            const containerWidth = controlContainer.clientWidth;
+            const containerHeight = controlContainer.clientHeight;
+
+            // Ensure the canvases take up half of the width and maintain aspect ratio
+            joystickCanvas.width = containerWidth * 0.48;
+            joystickCanvas.height = containerHeight;
+
+            robotDemoCanvas.width = containerWidth * 0.48;
+            robotDemoCanvas.height = containerHeight;
         };
 
-        window.addEventListener('resize', setCarouselItemWidth);
-        window.addEventListener('load', setCarouselItemWidth);
+        window.addEventListener('resize', () => {
+            setCanvasSize();
+        });
+
+        window.addEventListener('load', () => {
+            setCanvasSize();
+
+            // Initialize joystick and robot demo after canvas sizes are set
+            const joystickInit = new Event('DOMContentLoaded');
+            document.dispatchEvent(joystickInit);
+        });
     </script>
 </body>
 
