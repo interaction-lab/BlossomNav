@@ -148,7 +148,7 @@ We provide scripts to generate `intrinsics.json` for your own camera. Steps to c
 ## Hardware Configuration
 BlossomNav's hardware setup can be found on our website.
 
-Motors are connected to 12 and 23 for the left wheel and 13 and 24 for the right wheel.
+Motors are connected to GPIO 12 and GPIO 23 for the left wheel and GPIO 13 and GPIO24 for the right wheel.
 
 ## Acknowledgements
 This work is heavily inspired by following works: 
