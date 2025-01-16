@@ -148,6 +148,8 @@ We provide scripts to generate `intrinsics.json` for your own camera. Steps to c
 ## Hardware Configuration
 BlossomNav's hardware setup can be found on our website.
 
+Motors are connected to 12 and 23 for the left wheel and 13 and 24 for the right wheel.
+
 ## Acknowledgements
 This work is heavily inspired by following works: 
 <br />**Intelligent Robot Motion Lab, Princeton Unviersity** - [MonoNav](https://github.com/natesimon/MonoNav)
